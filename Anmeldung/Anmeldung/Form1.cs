@@ -35,8 +35,8 @@ namespace Anmeldung
         public Form1()
         {
             InitializeComponent();
-            dateTimePicker1.CustomFormat = "dd.MM.yyyy";
-            dateTimePicker1.Value = DateTime.Now;
+            dateTimePickerBirthday.CustomFormat = "dd.MM.yyyy";
+            dateTimePickerBirthday.Value = DateTime.Now;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -83,7 +83,7 @@ namespace Anmeldung
             this.Width = Screen.PrimaryScreen.Bounds.Width + 16;
             this.Height = Screen.PrimaryScreen.Bounds.Height - 270;
             this.FormBorderStyle = FormBorderStyle.None;
-            label6.Text = CustomerCount.ToString();
+            labelID.Text = CustomerCount.ToString();
             Cursor.Current = Cursors.Default;
         }
 
@@ -120,7 +120,7 @@ namespace Anmeldung
                 //gets a collection that contains all the rows
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 //populate the textbox from specific value of the coordinates of column and row.
-                textBox4.Text = row.Cells[0].Value.ToString() + " - " + row.Cells[1].Value.ToString() + " - " + row.Cells[2].Value.ToString();
+                textBoxSong.Text = row.Cells[0].Value.ToString() + " - " + row.Cells[1].Value.ToString() + " - " + row.Cells[2].Value.ToString();
             }
         }
 
@@ -130,7 +130,7 @@ namespace Anmeldung
             try
             {
                 //this code is used to search Name on the basis of textBox1.text
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Title like '%{0}%'", textBox1.Text.Trim().Replace("'", "''"));
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Title like '%{0}%'", textBoxTitle.Text.Trim().Replace("'", "''"));
                 dataGridView1.CurrentRow.Selected = true;
             }
             catch (Exception) { }
@@ -143,7 +143,7 @@ namespace Anmeldung
             try
             {
                 //this code is used to search Name on the basis of textBox1.text
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Artist like '%{0}%'", textBox5.Text.Trim().Replace("'", "''"));
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Artist like '%{0}%'", textBoxArtist.Text.Trim().Replace("'", "''"));
                 dataGridView1.CurrentRow.Selected = true;
             }
             catch (Exception) { }
@@ -153,8 +153,8 @@ namespace Anmeldung
         private void textBox1_Click(object sender, EventArgs e)
         {
             ShowTouchKeyboard(true, false);
-            if (textBox5.Text != String.Empty)
-                textBox5.Text = String.Empty;
+            if (textBoxArtist.Text != String.Empty)
+                textBoxArtist.Text = String.Empty;
         }
 
         private void textBox2_Click(object sender, EventArgs e)
@@ -175,8 +175,8 @@ namespace Anmeldung
         private void textBox5_Click(object sender, EventArgs e)
         {
             ShowTouchKeyboard(true, false);
-            if (textBox1.Text != String.Empty)
-                textBox1.Text = String.Empty;
+            if (textBoxTitle.Text != String.Empty)
+                textBoxTitle.Text = String.Empty;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -218,12 +218,12 @@ namespace Anmeldung
             {
                 String User = "";
 
-                if (String.IsNullOrEmpty(textBox2.Text.Trim()) || String.IsNullOrEmpty(textBox3.Text.Trim()) || String.IsNullOrEmpty(textBox4.Text.Trim()))
+                if (String.IsNullOrEmpty(textBoxName.Text.Trim()) || String.IsNullOrEmpty(textBoxMail.Text.Trim()) || String.IsNullOrEmpty(textBoxSong.Text.Trim()))
                 {
                     MessageBox.Show("Bitte alle Felder ausfüllen.");
                     return;
                 }
-                if (!textBox3.Text.Contains('@'))
+                if (!textBoxMail.Text.Contains('@'))
                 {
                     MessageBox.Show("Bitte valide Mail verwenden: mymail@mydomain.com");
                     return;
@@ -232,20 +232,21 @@ namespace Anmeldung
                 String timestamp = ((Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
 
                 User += CustomerCount.ToString() + "\n";
-                User += textBox2.Text + "\n";
-                User += textBox6.Text + "\n";
-                User += dateTimePicker1.Text + "\n";
-                User += textBox3.Text + "\n";
+                User += textBoxName.Text + "\n";
+                User += textBoxLastName.Text + "\n";
+                User += dateTimePickerBirthday.Text + "\n";
+                User += textBoxMail.Text + "\n";
+                User += textBoxSong.Text + "\n";
                 User += timestamp + "\n";
 
                 try
                 {
                     var response = Http.Post(registrationURL, new NameValueCollection() {
                         { "user_id", CustomerCount.ToString() },
-                        { "user_name", textBox2.Text },
-                        { "user_lastname", textBox6.Text },
-                        { "user_birthdate", dateTimePicker1.Text },
-                        { "user_email", textBox3.Text },
+                        { "user_name", textBoxName.Text },
+                        { "user_lastname", textBoxLastName.Text },
+                        { "user_birthdate", dateTimePickerBirthday.Text },
+                        { "user_email", textBoxMail.Text },
                         { "user_createtimestamp", timestamp}
                     });
                 }
@@ -277,13 +278,14 @@ namespace Anmeldung
                     {
                         MessageBox.Show("Ihre Nummer Lautet: " + (CustomerCount - 1).ToString() + "\nBitte merken!");
 
-                        label6.Text = (CustomerCount).ToString();
-                        textBox1.Text = "";
-                        textBox2.Text = "";
-                        textBox3.Text = "";
-                        textBox4.Text = "";
-                        textBox5.Text = "";
-                        textBox6.Text = "";
+                        labelID.Text = (CustomerCount).ToString();
+                        dateTimePickerBirthday.Value = DateTime.Now;
+                        textBoxTitle.Text = "";
+                        textBoxName.Text = "";
+                        textBoxMail.Text = "";
+                        textBoxSong.Text = "";
+                        textBoxArtist.Text = "";
+                        textBoxLastName.Text = "";
                     }
                 }
             }
@@ -381,13 +383,14 @@ namespace Anmeldung
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            label6.Text = (CustomerCount).ToString();
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-            textBox5.Text = "";
-            textBox6.Text = "";
+            labelID.Text = (CustomerCount).ToString();
+            dateTimePickerBirthday.Value = DateTime.Now;
+            textBoxTitle.Text = "";
+            textBoxName.Text = "";
+            textBoxMail.Text = "";
+            textBoxSong.Text = "";
+            textBoxArtist.Text = "";
+            textBoxLastName.Text = "";
         }
     }
 }

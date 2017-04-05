@@ -70,9 +70,9 @@ namespace VideoUploader
                 string[] lines = System.IO.File.ReadAllLines(pathCustomer + @"\" + e.Name.ToString());
                 newCustom.ID = Convert.ToInt32(lines[0]);
                 newCustom.Name = lines[1];
-                newCustom.Mail = lines[2];
+                newCustom.LastName = lines[2];
                 newCustom.Song = lines[3];
-                newCustom.Video = "";
+                newCustom.Video = lines[5];
                 newCustom.Status = (byte)customerStatus.None;
             }
             else
@@ -95,7 +95,7 @@ namespace VideoUploader
 
             int count = registrationList.Count - 1;
             if (registrationList[count].Status != (byte)customerStatus.Failed)
-                listBoxAnmeldung.Items.Add(registrationList[count].ID + "|" + registrationList[count].Name + "|" + registrationList[count].Mail + "|" + registrationList[count].Song + "|" + registrationList[count].Status);
+                listBoxAnmeldung.Items.Add(registrationList[count].ID + "|" + registrationList[count].Name + "|" + registrationList[count].LastName + "|" + registrationList[count].Song + "|" + registrationList[count].Status);
             else
                 listBoxAnmeldung.Items.Add(registrationList[count].Name + "|" + registrationList[count].Status);
 
@@ -131,7 +131,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Ready)
                 {
-                    listBoxReady.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxReady.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
                     cust.Status = (byte)customerStatus.Wait;
                     for (int i = 0; i < listBoxAnmeldung.Items.Count; i++)
                     {
@@ -215,7 +215,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Success)
                 {
-                    listBoxSuccess.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxSuccess.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
                     var response = Http.Post(httpBaseUri, new NameValueCollection() {
                         { "user_id", cust.ID.ToString() },
                         { "videouploaded", "true"},
@@ -243,7 +243,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Failed)
                 {
-                    listBoxFailed.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxFailed.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
                     cust.Status = (byte)customerStatus.Failed;
                     for (int i = 0; i < listBoxUpload.Items.Count; i++)
                     {
@@ -308,7 +308,7 @@ namespace VideoUploader
                 {
                     FtpAsync(userName, password, ftpBaseUri, pathReadyCustomer + @"\" + cust.ID + ".mp4", cust.ID);
                     cust.Status = (byte)customerStatus.Upload;
-                    listBoxUpload.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxUpload.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
                     for (int i = 0; i < listBoxReady.Items.Count; i++)
                     {
                         if (Convert.ToInt32(listBoxReady.Items[i].ToString().Split('|')[0]) == cust.ID)
@@ -352,16 +352,15 @@ namespace VideoUploader
         private int id;
         private string name;
         private string lastname;
-        private string mail;
         private string song;
         private string video;
         private byte status;
 
-        public customer(int ID, string Name, string Mail, string Song, string Video, byte Status)
+        public customer(int ID, string Name,string LastName, string Song, string Video, byte Status)
         {
             this.ID = ID;
             this.Name = Name;
-            this.Mail = Mail;
+            this.LastName = LastName;
             this.Song = Song;
             this.Video = Video;
             this.Status = Status;
@@ -379,10 +378,10 @@ namespace VideoUploader
             set { name = value; }
         }
 
-        public string Mail
+        public string LastName
         {
-            get { return mail; }
-            set { mail = value; }
+            get { return lastname; }
+            set { lastname = value; }
         }
 
         public string Song
