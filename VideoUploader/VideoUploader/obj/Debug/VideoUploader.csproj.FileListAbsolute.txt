@@ -1,0 +1,9 @@
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\bin\Debug\VideoUploader.exe.config
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\bin\Debug\VideoUploader.exe
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\bin\Debug\VideoUploader.pdb
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\obj\Debug\VideoUploader.csprojResolveAssemblyReference.cache
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\obj\Debug\VideoUploader.Properties.Resources.resources
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\obj\Debug\VideoUploader.csproj.GenerateResource.Cache
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\obj\Debug\VideoUploader.exe
+c:\users\sts\documents\visual studio 2015\Projects\VideoUploader\VideoUploader\obj\Debug\VideoUploader.pdb
+C:\Users\sts\Documents\Visual Studio 2015\Projects\VideoUploader\VideoUploader\obj\Debug\VideoUploader.Form1.resources

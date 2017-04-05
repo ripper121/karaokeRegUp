@@ -1,0 +1,8 @@
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\bin\Release\Anmeldung.exe.config
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\bin\Release\Anmeldung.exe
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\bin\Release\Anmeldung.pdb
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\obj\Release\Anmeldung.Form1.resources
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\obj\Release\Anmeldung.Properties.Resources.resources
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\obj\Release\Anmeldung.csproj.GenerateResource.Cache
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\obj\Release\Anmeldung.exe
+c:\users\sts\documents\visual studio 2015\Projects\Anmeldung\Anmeldung\obj\Release\Anmeldung.pdb
