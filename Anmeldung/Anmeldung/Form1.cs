@@ -253,6 +253,11 @@ namespace Anmeldung
                         { "user_email", textBox3.Text },
                         { "user_createtimestamp", timestamp}
                     });
+                    if (System.Text.Encoding.Default.GetString(response).Contains("existing_user_login"))
+                    {
+                        MessageBox.Show("Your Mail >" + textBox3.Text + "< is allready in use!");
+                        return;
+                    }
                 }
                 catch (Exception ex)
                 {

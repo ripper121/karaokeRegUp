@@ -435,6 +435,8 @@ namespace VideoUploader
                         textBoxCustomer.Text = cust.ID.ToString() + " | " + cust.Name;
                         try
                         {
+                            if (WaitForFile(pathImageOut, FileMode.Open, FileAccess.Read))
+                                File.Delete(pathImageOut);
                             writeToPNG(imageText + selectedCustomer, pathImageIn, pathImageOut, imageTextPos, imageTextSize);
                         }
                         catch (Exception ex)
