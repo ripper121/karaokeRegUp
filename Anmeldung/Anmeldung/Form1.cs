@@ -11,16 +11,17 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Net;
+using System.Threading;
 
 namespace Anmeldung
 {
     public partial class Form1 : Form
     {
         [DllImport("user32.dll")]
-        public static extern IntPtr FindWindow(string sClassName, string sAppName);
+        private static extern IntPtr FindWindow(string sClassName, string sAppName);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr PostMessage(int hWnd, uint msg, int wParam, int lParam);
+        private static extern IntPtr PostMessage(int hWnd, uint msg, int wParam, int lParam);
 
         DataTable MusicDataTable;
         double CustomerCount = 0;
@@ -30,23 +31,24 @@ namespace Anmeldung
         String registrationURL = "";
         String disclaimer = "";
 
-        public Configuration config = null;
+        private Configuration config = null;
 
         public Form1()
         {
             InitializeComponent();
-            dateTimePickerBirthday.CustomFormat = "dd.MM.yyyy";
-            dateTimePickerBirthday.Value = DateTime.Now;
+            dateTimePicker1.CustomFormat = "dd.MM.yyyy";
+            dateTimePicker1.Value = DateTime.Now;
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {            
-            try {
+        {
+            try
+            {
                 config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
                 CustomerCount = Convert.ToDouble(config.AppSettings.Settings["CustomerCount"].Value);
                 SongFile = config.AppSettings.Settings["SongFile"].Value;
                 ClosePassword = config.AppSettings.Settings["ClosePassword"].Value;
-                customerFolder = config.AppSettings.Settings["CustomerFolder"].Value;
+                customerFolder = config.AppSettings.Settings["CustomerFolder"].Value + @"\";
                 registrationURL = config.AppSettings.Settings["registrationURL"].Value;
                 disclaimer = config.AppSettings.Settings["Disclaimer"].Value;
                 if (!Directory.Exists(customerFolder))
@@ -55,8 +57,9 @@ namespace Anmeldung
                     return;
                 }
             }
-            catch(Exception ex){
-                    MessageBox.Show("Cant load config file.");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant load config file.");
                 return;
             }
 
@@ -71,7 +74,8 @@ namespace Anmeldung
                 dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Ascending);
                 dataGridView1.Columns["ID"].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show("Cant open Song-File.\nPlease set it in the config.");
                 return;
@@ -83,7 +87,7 @@ namespace Anmeldung
             this.Width = Screen.PrimaryScreen.Bounds.Width + 16;
             this.Height = Screen.PrimaryScreen.Bounds.Height - 270;
             this.FormBorderStyle = FormBorderStyle.None;
-            labelID.Text = CustomerCount.ToString();
+            label6.Text = CustomerCount.ToString();
             Cursor.Current = Cursors.Default;
         }
 
@@ -120,7 +124,7 @@ namespace Anmeldung
                 //gets a collection that contains all the rows
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 //populate the textbox from specific value of the coordinates of column and row.
-                textBoxSong.Text = row.Cells[0].Value.ToString() + " - " + row.Cells[1].Value.ToString() + " - " + row.Cells[2].Value.ToString();
+                textBox4.Text = row.Cells[0].Value.ToString() + " - " + row.Cells[1].Value.ToString() + " - " + row.Cells[2].Value.ToString();
             }
         }
 
@@ -130,7 +134,7 @@ namespace Anmeldung
             try
             {
                 //this code is used to search Name on the basis of textBox1.text
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Title like '%{0}%'", textBoxTitle.Text.Trim().Replace("'", "''"));
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Title like '%{0}%'", textBox1.Text.Trim().Replace("'", "''"));
                 dataGridView1.CurrentRow.Selected = true;
             }
             catch (Exception) { }
@@ -143,7 +147,7 @@ namespace Anmeldung
             try
             {
                 //this code is used to search Name on the basis of textBox1.text
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Artist like '%{0}%'", textBoxArtist.Text.Trim().Replace("'", "''"));
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = string.Format("Artist like '%{0}%'", textBox5.Text.Trim().Replace("'", "''"));
                 dataGridView1.CurrentRow.Selected = true;
             }
             catch (Exception) { }
@@ -153,8 +157,8 @@ namespace Anmeldung
         private void textBox1_Click(object sender, EventArgs e)
         {
             ShowTouchKeyboard(true, false);
-            if (textBoxArtist.Text != String.Empty)
-                textBoxArtist.Text = String.Empty;
+            if (textBox5.Text != String.Empty)
+                textBox5.Text = String.Empty;
         }
 
         private void textBox2_Click(object sender, EventArgs e)
@@ -175,8 +179,8 @@ namespace Anmeldung
         private void textBox5_Click(object sender, EventArgs e)
         {
             ShowTouchKeyboard(true, false);
-            if (textBoxTitle.Text != String.Empty)
-                textBoxTitle.Text = String.Empty;
+            if (textBox1.Text != String.Empty)
+                textBox1.Text = String.Empty;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -212,18 +216,18 @@ namespace Anmeldung
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(disclaimer,"Disclaimer",MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(disclaimer, "Disclaimer", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.OK)
             {
                 String User = "";
 
-                if (String.IsNullOrEmpty(textBoxName.Text.Trim()) || String.IsNullOrEmpty(textBoxMail.Text.Trim()) || String.IsNullOrEmpty(textBoxSong.Text.Trim()))
+                if (String.IsNullOrEmpty(textBox2.Text.Trim()) || String.IsNullOrEmpty(textBox3.Text.Trim()) || String.IsNullOrEmpty(textBox4.Text.Trim()))
                 {
                     MessageBox.Show("Bitte alle Felder ausfüllen.");
                     return;
                 }
-                if (!textBoxMail.Text.Contains('@'))
+                if (!textBox3.Text.Contains('@'))
                 {
                     MessageBox.Show("Bitte valide Mail verwenden: mymail@mydomain.com");
                     return;
@@ -232,21 +236,20 @@ namespace Anmeldung
                 String timestamp = ((Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
 
                 User += CustomerCount.ToString() + "\n";
-                User += textBoxName.Text + "\n";
-                User += textBoxLastName.Text + "\n";
-                User += dateTimePickerBirthday.Text + "\n";
-                User += textBoxMail.Text + "\n";
-                User += textBoxSong.Text + "\n";
+                User += textBox2.Text + "\n";
+                User += textBox6.Text + "\n";
+                User += dateTimePicker1.Text + "\n";
+                User += textBox3.Text + "\n";
                 User += timestamp + "\n";
 
                 try
                 {
                     var response = Http.Post(registrationURL, new NameValueCollection() {
                         { "user_id", CustomerCount.ToString() },
-                        { "user_name", textBoxName.Text },
-                        { "user_lastname", textBoxLastName.Text },
-                        { "user_birthdate", dateTimePickerBirthday.Text },
-                        { "user_email", textBoxMail.Text },
+                        { "user_name", textBox2.Text },
+                        { "user_lastname", textBox6.Text },
+                        { "user_birthdate", dateTimePicker1.Text },
+                        { "user_email", textBox3.Text },
                         { "user_createtimestamp", timestamp}
                     });
                 }
@@ -278,14 +281,13 @@ namespace Anmeldung
                     {
                         MessageBox.Show("Ihre Nummer Lautet: " + (CustomerCount - 1).ToString() + "\nBitte merken!");
 
-                        labelID.Text = (CustomerCount).ToString();
-                        dateTimePickerBirthday.Value = DateTime.Now;
-                        textBoxTitle.Text = "";
-                        textBoxName.Text = "";
-                        textBoxMail.Text = "";
-                        textBoxSong.Text = "";
-                        textBoxArtist.Text = "";
-                        textBoxLastName.Text = "";
+                        label6.Text = (CustomerCount).ToString();
+                        textBox1.Text = "";
+                        textBox2.Text = "";
+                        textBox3.Text = "";
+                        textBox4.Text = "";
+                        textBox5.Text = "";
+                        textBox6.Text = "";
                     }
                 }
             }
@@ -300,7 +302,7 @@ namespace Anmeldung
 
         private void addSetting(string key, string value)
         {
-            config.AppSettings.Settings.Add(key,value);
+            config.AppSettings.Settings.Add(key, value);
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
         }
@@ -309,88 +311,32 @@ namespace Anmeldung
         {
             try
             {
-                // Kill the previous process so the registry change will take effect.
-                var processlist = Process.GetProcesses();
 
-                foreach (var process in processlist.Where(process => process.ProcessName == "TabTip"))
-                {
-                    process.Kill();
-                    break;
-                }
             }
             catch (Exception ex) { }
         }
 
         public void ShowTouchKeyboard(bool isVisible, bool numericKeyboard)
         {
+            // if (Process.GetProcessesByName("process_name").Length > 0)
             try
             {
-                if (isVisible)
-                {
-                    const string keyName = "HKEY_CURRENT_USER\\Software\\Microsoft\\TabletTip\\1.7";
 
-                    var regValue = (int)Registry.GetValue(keyName, "KeyboardLayoutPreference", 0);
-                    var regShowNumericKeyboard = regValue == 1;
-
-                    // Note: Remove this if do not want to control docked state.
-                    var dockedRegValue = (int)Registry.GetValue(keyName, "EdgeTargetDockedState", 1);
-                    var restoreDockedState = dockedRegValue == 0;
-
-                    if (numericKeyboard && regShowNumericKeyboard == false)
-                    {
-                        // Set the registry so it will show the number pad via the thumb keyboard.
-                        Registry.SetValue(keyName, "KeyboardLayoutPreference", 1, RegistryValueKind.DWord);
-
-                        // Kill the previous process so the registry change will take effect.
-                        KillTabTip();
-                    }
-                    else if (numericKeyboard == false && regShowNumericKeyboard)
-                    {
-                        // Set the registry so it will NOT show the number pad via the thumb keyboard.
-                        Registry.SetValue(keyName, "KeyboardLayoutPreference", 0, RegistryValueKind.DWord);
-
-                        // Kill the previous process so the registry change will take effect.
-                        KillTabTip();
-                    }
-
-                    // Note: Remove this if do not want to control docked state.
-                    if (restoreDockedState)
-                    {
-                        // Set the registry so it will show as docked at the bottom rather than floating.
-                        Registry.SetValue(keyName, "EdgeTargetDockedState", 1, RegistryValueKind.DWord);
-
-                        // Kill the previous process so the registry change will take effect.
-                        KillTabTip();
-                    }
-
-                    Process.Start("c:\\Program Files\\Common Files\\Microsoft Shared\\ink\\TabTip.exe");
-                }
-                else
-                {
-                    var win8Version = new Version(6, 2, 9200, 0);
-
-                    if (Environment.OSVersion.Version >= win8Version)
-                    {
-                        const uint wmSyscommand = 274;
-                        const uint scClose = 61536;
-                        var keyboardWnd = FindWindow("IPTip_Main_Window", null);
-                        PostMessage(keyboardWnd.ToInt32(), wmSyscommand, (int)scClose, 0);
-                    }
-                }
             }
             catch (Exception ex) { }
         }
 
+
+
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            labelID.Text = (CustomerCount).ToString();
-            dateTimePickerBirthday.Value = DateTime.Now;
-            textBoxTitle.Text = "";
-            textBoxName.Text = "";
-            textBoxMail.Text = "";
-            textBoxSong.Text = "";
-            textBoxArtist.Text = "";
-            textBoxLastName.Text = "";
+            label6.Text = (CustomerCount).ToString();
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
         }
     }
 }

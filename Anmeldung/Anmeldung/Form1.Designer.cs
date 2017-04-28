@@ -30,22 +30,22 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePickerBirthday = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBoxLastName = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.labelID = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBoxSong = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxMail = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonSend = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBoxTitle = new System.Windows.Forms.TextBox();
-            this.textBoxArtist = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonReset = new System.Windows.Forms.Button();
@@ -78,17 +78,17 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.dateTimePickerBirthday);
+            this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.textBoxLastName);
+            this.groupBox1.Controls.Add(this.textBox6);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.labelID);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBoxSong);
+            this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBoxMail);
+            this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBoxName);
+            this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -97,16 +97,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kunden Daten";
             // 
-            // dateTimePickerBirthday
+            // dateTimePicker1
             // 
-            this.dateTimePickerBirthday.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerBirthday.Location = new System.Drawing.Point(470, 12);
-            this.dateTimePickerBirthday.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
-            this.dateTimePickerBirthday.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.dateTimePickerBirthday.Name = "dateTimePickerBirthday";
-            this.dateTimePickerBirthday.Size = new System.Drawing.Size(267, 20);
-            this.dateTimePickerBirthday.TabIndex = 11;
-            this.dateTimePickerBirthday.Value = new System.DateTime(2017, 4, 4, 0, 0, 0, 0);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(470, 12);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(267, 20);
+            this.dateTimePicker1.TabIndex = 11;
+            this.dateTimePicker1.Value = new System.DateTime(2017, 4, 4, 0, 0, 0, 0);
             // 
             // label9
             // 
@@ -117,12 +117,12 @@
             this.label9.TabIndex = 10;
             this.label9.Text = "Geburtsdatum:";
             // 
-            // textBoxLastName
+            // textBox6
             // 
-            this.textBoxLastName.Location = new System.Drawing.Point(260, 13);
-            this.textBoxLastName.Name = "textBoxLastName";
-            this.textBoxLastName.Size = new System.Drawing.Size(122, 20);
-            this.textBoxLastName.TabIndex = 9;
+            this.textBox6.Location = new System.Drawing.Point(260, 13);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(122, 20);
+            this.textBox6.TabIndex = 9;
             // 
             // label3
             // 
@@ -133,14 +133,14 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Nachname:";
             // 
-            // labelID
+            // label6
             // 
-            this.labelID.AutoSize = true;
-            this.labelID.Location = new System.Drawing.Point(470, 42);
-            this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(13, 13);
-            this.labelID.TabIndex = 7;
-            this.labelID.Text = "0";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(470, 42);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "0";
             // 
             // label5
             // 
@@ -151,14 +151,14 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Nutzer ID:";
             // 
-            // textBoxSong
+            // textBox4
             // 
-            this.textBoxSong.Location = new System.Drawing.Point(64, 65);
-            this.textBoxSong.Name = "textBoxSong";
-            this.textBoxSong.ReadOnly = true;
-            this.textBoxSong.Size = new System.Drawing.Size(673, 20);
-            this.textBoxSong.TabIndex = 5;
-            this.textBoxSong.Click += new System.EventHandler(this.textBox4_Click);
+            this.textBox4.Location = new System.Drawing.Point(64, 65);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(673, 20);
+            this.textBox4.TabIndex = 5;
+            this.textBox4.Click += new System.EventHandler(this.textBox4_Click);
             // 
             // label4
             // 
@@ -169,13 +169,13 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Song:";
             // 
-            // textBoxMail
+            // textBox3
             // 
-            this.textBoxMail.Location = new System.Drawing.Point(64, 39);
-            this.textBoxMail.Name = "textBoxMail";
-            this.textBoxMail.Size = new System.Drawing.Size(318, 20);
-            this.textBoxMail.TabIndex = 3;
-            this.textBoxMail.Click += new System.EventHandler(this.textBox3_Click);
+            this.textBox3.Location = new System.Drawing.Point(64, 39);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(318, 20);
+            this.textBox3.TabIndex = 3;
+            this.textBox3.Click += new System.EventHandler(this.textBox3_Click);
             // 
             // label2
             // 
@@ -186,13 +186,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "E-Mail:";
             // 
-            // textBoxName
+            // textBox2
             // 
-            this.textBoxName.Location = new System.Drawing.Point(64, 13);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(122, 20);
-            this.textBoxName.TabIndex = 1;
-            this.textBoxName.Click += new System.EventHandler(this.textBox2_Click);
+            this.textBox2.Location = new System.Drawing.Point(64, 13);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(122, 20);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             // 
             // label1
             // 
@@ -203,23 +203,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Vorname:";
             // 
-            // buttonSend
+            // button1
             // 
-            this.buttonSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSend.Location = new System.Drawing.Point(761, 17);
-            this.buttonSend.Name = "buttonSend";
-            this.buttonSend.Size = new System.Drawing.Size(152, 105);
-            this.buttonSend.TabIndex = 8;
-            this.buttonSend.Text = "Absenden";
-            this.buttonSend.UseVisualStyleBackColor = true;
-            this.buttonSend.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(761, 17);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(152, 105);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Absenden";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.textBoxTitle);
-            this.groupBox2.Controls.Add(this.textBoxArtist);
+            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.textBox5);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(12, 128);
@@ -229,23 +229,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Suche";
             // 
-            // textBoxTitle
+            // textBox1
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(9, 32);
-            this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(250, 20);
-            this.textBoxTitle.TabIndex = 1;
-            this.textBoxTitle.Click += new System.EventHandler(this.textBox1_Click);
-            this.textBoxTitle.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Location = new System.Drawing.Point(9, 32);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(250, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBoxArtist
+            // textBox5
             // 
-            this.textBoxArtist.Location = new System.Drawing.Point(270, 32);
-            this.textBoxArtist.Name = "textBoxArtist";
-            this.textBoxArtist.Size = new System.Drawing.Size(250, 20);
-            this.textBoxArtist.TabIndex = 6;
-            this.textBoxArtist.Click += new System.EventHandler(this.textBox5_Click);
-            this.textBoxArtist.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.textBox5.Location = new System.Drawing.Point(270, 32);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(250, 20);
+            this.textBox5.TabIndex = 6;
+            this.textBox5.Click += new System.EventHandler(this.textBox5_Click);
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label8
             // 
@@ -284,7 +284,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 759);
             this.Controls.Add(this.buttonReset);
-            this.Controls.Add(this.buttonSend);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -308,23 +308,23 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button buttonSend;
-        private System.Windows.Forms.Label labelID;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxSong;
+        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxMail;
+        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBoxTitle;
-        private System.Windows.Forms.TextBox textBoxArtist;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dateTimePickerBirthday;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBoxLastName;
+        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonReset;
     }

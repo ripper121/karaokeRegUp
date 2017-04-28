@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
@@ -28,17 +29,20 @@ namespace VideoUploader
             Failed
         };
 
-        const string    pathCustomer = @"\\192.168.10.200\Tausch\Intern\temp\Customer",
-                        pathReadyCustomer = @"\\192.168.10.200\Tausch\Intern\temp\CustomerReady",
-                        pathVideo = @"mp4",
-                        pathImage = "test.png";
-        const string    imageText = "#";
-        Point           imageTextPos = new Point(10, 10);
-        const int       imageTextSize = 40;
-        const string    userName = "projekthyundai";
-        const string    password = "I!4fis=imC";
-        const string    ftpBaseUri = "ftp://hyundai.obsession.de/uploads/";
-        const string    httpBaseUri = "http://hyundai.obsession.de/video/add";
+        private string      pathCustomer = "",
+                            pathReadyCustomer = "",
+                            pathVideo = "",
+                            pathImageIn = "",
+                            pathImageOut = "";
+        private string      imageText = "";
+        private Point       imageTextPos = new Point(0, 0);
+        private int         imageTextSize = 0;
+        private string      ftpUserName = "";
+        private string      ftpPassword = "";
+        private string      ftpBaseUri = "";
+        private string      httpBaseUri = "";
+        private Configuration config = null;
+
 
         FileSystemWatcher txtFSW, mp4FSW;
 
@@ -64,38 +68,43 @@ namespace VideoUploader
 
         void txt_Created(object sender, FileSystemEventArgs e)
         {
+            addCustomer(e.Name);
+        }
+
+        void addCustomer(string file)
+        {
             customer newCustom = new customer(0, "", "", "", "", 0);
-            if (WaitForFile(pathCustomer + @"\" + e.Name.ToString(), FileMode.Open, FileAccess.Read))
+            if (WaitForFile(pathCustomer + @"\" + file, FileMode.Open, FileAccess.Read))
             {
-                string[] lines = System.IO.File.ReadAllLines(pathCustomer + @"\" + e.Name.ToString());
+                string[] lines = System.IO.File.ReadAllLines(pathCustomer + @"\" + file);
                 newCustom.ID = Convert.ToInt32(lines[0]);
                 newCustom.Name = lines[1];
-                newCustom.LastName = lines[2];
+                newCustom.Mail = lines[2];
                 newCustom.Song = lines[3];
-                newCustom.Video = lines[5];
+                newCustom.Video = "";
                 newCustom.Status = (byte)customerStatus.None;
             }
             else
             {
                 newCustom.ID = -1;
-                newCustom.Name = e.Name;
+                newCustom.Name = file;
                 newCustom.Status = (byte)customerStatus.Failed;
             }
             registrationList.Add(newCustom);
-            addCustomer();
+            addCustomerToListbox();
         }
 
-        private void addCustomer()
+        private void addCustomerToListbox()
         {
             if (listBoxAnmeldung.InvokeRequired)
             {
-                listBoxAnmeldung.Invoke(new MethodInvoker(addCustomer));
+                listBoxAnmeldung.Invoke(new MethodInvoker(addCustomerToListbox));
                 return;
             }
 
             int count = registrationList.Count - 1;
             if (registrationList[count].Status != (byte)customerStatus.Failed)
-                listBoxAnmeldung.Items.Add(registrationList[count].ID + "|" + registrationList[count].Name + "|" + registrationList[count].LastName + "|" + registrationList[count].Song + "|" + registrationList[count].Status);
+                listBoxAnmeldung.Items.Add(registrationList[count].ID + "|" + registrationList[count].Name + "|" + registrationList[count].Mail + "|" + registrationList[count].Song + "|" + registrationList[count].Status);
             else
                 listBoxAnmeldung.Items.Add(registrationList[count].Name + "|" + registrationList[count].Status);
 
@@ -111,10 +120,16 @@ namespace VideoUploader
                     cust.Status = (byte)customerStatus.Ready;
                     if (WaitForFile(pathCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
                         File.AppendAllText(pathCustomer + @"\" + cust.ID + ".txt", cust.Video + "\n");
+                    else
+                        MessageBox.Show("Cant access " + pathCustomer + @"\" + cust.ID + ".txt");
                     if (WaitForFile(pathCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
                         File.Copy(pathCustomer + @"\" + cust.ID + ".txt", pathReadyCustomer + @"\" + cust.ID + ".txt");
+                    else
+                        MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
                     if (WaitForFile(cust.Video, FileMode.Open, FileAccess.Read))
                         File.Copy(cust.Video, pathReadyCustomer + @"\" + cust.ID + ".mp4");
+                    else
+                        MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
                     setReady();
                 }
             }
@@ -131,7 +146,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Ready)
                 {
-                    listBoxReady.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
+                    listBoxReady.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
                     cust.Status = (byte)customerStatus.Wait;
                     for (int i = 0; i < listBoxAnmeldung.Items.Count; i++)
                     {
@@ -149,7 +164,70 @@ namespace VideoUploader
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FSW_Initialisieren();
+            try
+            {
+                config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+                pathCustomer = config.AppSettings.Settings["pathCustomer"].Value;
+                pathReadyCustomer = config.AppSettings.Settings["pathReadyCustomer"].Value;
+                pathVideo = config.AppSettings.Settings["pathVideo"].Value;
+                pathImageIn = config.AppSettings.Settings["pathImageIn"].Value;
+                pathImageOut = config.AppSettings.Settings["pathImageOut"].Value;
+                imageText = config.AppSettings.Settings["imageText"].Value;
+                imageTextPos = new Point(Convert.ToInt32(config.AppSettings.Settings["imageTextPosX"].Value), Convert.ToInt32(config.AppSettings.Settings["imageTextPosY"].Value));
+                imageTextSize = Convert.ToInt32(config.AppSettings.Settings["imageTextSize"].Value);
+                ftpUserName = config.AppSettings.Settings["ftpUserName"].Value;
+                ftpPassword = config.AppSettings.Settings["ftpPassword"].Value;
+                ftpBaseUri = config.AppSettings.Settings["ftpBaseUri"].Value;
+                httpBaseUri = config.AppSettings.Settings["httpBaseUri"].Value;
+
+
+                if (!Directory.Exists(pathCustomer))
+                {
+                    MessageBox.Show("Cant find pathCustomer:" + pathCustomer);
+                    return;
+                }
+                if (!Directory.Exists(pathReadyCustomer))
+                {
+                    MessageBox.Show("Cant find pathReadyCustomer:" + pathReadyCustomer);
+                    return;
+                }
+                if (!Directory.Exists(pathVideo))
+                {
+                    MessageBox.Show("Cant find customerFolder:" + pathVideo);
+                    return;
+                }
+                if (!File.Exists(pathImageIn))
+                {
+                    MessageBox.Show("Cant find pathImageIn:" + pathImageIn);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant load config file: " + ex.Message);
+                return;
+            }
+
+            try {
+                DirectoryInfo d = new DirectoryInfo(pathCustomer);
+                foreach (var file in d.GetFiles("*.txt"))
+                {
+                    addCustomer(file.Name);
+                }
+                
+            } catch (Exception ex)
+            {
+
+            }
+            try
+            {
+                FSW_Initialisieren();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant init FSW_Initialisieren: " + ex.Message);
+                return;
+            }
         }
 
         private async void FtpAsync(string userName, string password, string ftpBaseUri, string fileName, int ID)
@@ -178,13 +256,16 @@ namespace VideoUploader
                 }
                 catch (Exception ex)
                 {
+                    int customerID = 0;
                     foreach (customer cust in registrationList)
                     {
                         if (cust.ID == ID)
                         {
                             cust.Status = (byte)customerStatus.Failed;
+                            customerID = cust.ID;
                         }
                     }
+                    MessageBox.Show("Upload failed for:" + customerID.ToString() + " : " + ex.Message);
                     setFailed();
                 }
             }
@@ -215,7 +296,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Success)
                 {
-                    listBoxSuccess.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
+                    listBoxSuccess.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
                     var response = Http.Post(httpBaseUri, new NameValueCollection() {
                         { "user_id", cust.ID.ToString() },
                         { "videouploaded", "true"},
@@ -243,7 +324,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Failed)
                 {
-                    listBoxFailed.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
+                    listBoxFailed.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
                     cust.Status = (byte)customerStatus.Failed;
                     for (int i = 0; i < listBoxUpload.Items.Count; i++)
                     {
@@ -266,7 +347,13 @@ namespace VideoUploader
                     {
                         cust.Status = (byte)customerStatus.Selected;
                         textBoxCustomer.Text = cust.ID.ToString() + " | " + cust.Name;
-                        writeToPNG(imageText + selectedCustomer, pathImage, imageTextPos, imageTextSize);
+                        try {
+                            writeToPNG(imageText + selectedCustomer, pathImageIn, pathImageOut, imageTextPos, imageTextSize);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Can't write to Output Image: " + ex.Message);
+                        }
                     }
                     else if (cust.Status == (byte)customerStatus.Selected)
                     {
@@ -277,9 +364,9 @@ namespace VideoUploader
         }
 
 
-        private void writeToPNG(String text, String file, Point pos, int size)
+        private void writeToPNG(String text, String fileIn, String fileOut, Point pos, int size)
         {
-            FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(fileIn, FileMode.Open, FileAccess.Read);
             Image image = Image.FromStream(fs);
             fs.Close();
 
@@ -293,7 +380,7 @@ namespace VideoUploader
             graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             graphics.DrawString(text, font, Brushes.Black, pos.X, pos.Y);
 
-            b.Save(file, image.RawFormat);
+            b.Save(fileOut, image.RawFormat);
 
             image.Dispose();
             b.Dispose();
@@ -306,9 +393,9 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Wait)
                 {
-                    FtpAsync(userName, password, ftpBaseUri, pathReadyCustomer + @"\" + cust.ID + ".mp4", cust.ID);
+                    FtpAsync(ftpUserName, ftpPassword, ftpBaseUri, pathReadyCustomer + @"\" + cust.ID + ".mp4", cust.ID);
                     cust.Status = (byte)customerStatus.Upload;
-                    listBoxUpload.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.LastName + "|" + cust.Song + "|" + cust.Status);
+                    listBoxUpload.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
                     for (int i = 0; i < listBoxReady.Items.Count; i++)
                     {
                         if (Convert.ToInt32(listBoxReady.Items[i].ToString().Split('|')[0]) == cust.ID)
@@ -352,15 +439,16 @@ namespace VideoUploader
         private int id;
         private string name;
         private string lastname;
+        private string mail;
         private string song;
         private string video;
         private byte status;
 
-        public customer(int ID, string Name,string LastName, string Song, string Video, byte Status)
+        public customer(int ID, string Name, string Mail, string Song, string Video, byte Status)
         {
             this.ID = ID;
             this.Name = Name;
-            this.LastName = LastName;
+            this.Mail = Mail;
             this.Song = Song;
             this.Video = Video;
             this.Status = Status;
@@ -378,10 +466,10 @@ namespace VideoUploader
             set { name = value; }
         }
 
-        public string LastName
+        public string Mail
         {
-            get { return lastname; }
-            set { lastname = value; }
+            get { return mail; }
+            set { mail = value; }
         }
 
         public string Song
