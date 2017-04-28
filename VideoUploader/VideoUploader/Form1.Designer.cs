@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.buttonRetry = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -144,6 +145,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonRetry);
             this.groupBox2.Controls.Add(this.listBoxUpload);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
@@ -155,7 +157,7 @@
             this.groupBox2.Controls.Add(this.listBoxFailed);
             this.groupBox2.Location = new System.Drawing.Point(12, 209);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(713, 562);
+            this.groupBox2.Size = new System.Drawing.Size(713, 594);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Upload";
@@ -204,11 +206,21 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Bereit zum Upload:";
             // 
+            // buttonRetry
+            // 
+            this.buttonRetry.Location = new System.Drawing.Point(6, 556);
+            this.buttonRetry.Name = "buttonRetry";
+            this.buttonRetry.Size = new System.Drawing.Size(123, 23);
+            this.buttonRetry.TabIndex = 16;
+            this.buttonRetry.Text = "Retry";
+            this.buttonRetry.UseVisualStyleBackColor = true;
+            this.buttonRetry.Click += new System.EventHandler(this.buttonRetry_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 784);
+            this.ClientSize = new System.Drawing.Size(737, 815);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -239,6 +251,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox listBoxUpload;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonRetry;
     }
 }
 

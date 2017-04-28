@@ -240,6 +240,7 @@ namespace Anmeldung
                 User += textBox6.Text + "\n";
                 User += dateTimePicker1.Text + "\n";
                 User += textBox3.Text + "\n";
+                User += textBox4.Text + "\n";
                 User += timestamp + "\n";
 
                 try

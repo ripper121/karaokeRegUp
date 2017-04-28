@@ -26,21 +26,22 @@ namespace VideoUploader
             Wait,
             Upload,
             Success,
-            Failed
+            Failed,
+            Final
         };
 
-        private string      pathCustomer = "",
+        private string pathCustomer = "",
                             pathReadyCustomer = "",
                             pathVideo = "",
                             pathImageIn = "",
                             pathImageOut = "";
-        private string      imageText = "";
-        private Point       imageTextPos = new Point(0, 0);
-        private int         imageTextSize = 0;
-        private string      ftpUserName = "";
-        private string      ftpPassword = "";
-        private string      ftpBaseUri = "";
-        private string      httpBaseUri = "";
+        private string imageText = "";
+        private Point imageTextPos = new Point(0, 0);
+        private int imageTextSize = 0;
+        private string ftpUserName = "";
+        private string ftpPassword = "";
+        private string ftpBaseUri = "";
+        private string httpBaseUri = "";
         private Configuration config = null;
 
 
@@ -78,9 +79,9 @@ namespace VideoUploader
             {
                 string[] lines = System.IO.File.ReadAllLines(pathCustomer + @"\" + file);
                 newCustom.ID = Convert.ToInt32(lines[0]);
-                newCustom.Name = lines[1];
-                newCustom.Mail = lines[2];
-                newCustom.Song = lines[3];
+                newCustom.Name = lines[1] + " - " + lines[2];
+                newCustom.Mail = lines[4];
+                newCustom.Song = lines[5];
                 newCustom.Video = "";
                 newCustom.Status = (byte)customerStatus.None;
             }
@@ -92,6 +93,34 @@ namespace VideoUploader
             }
             registrationList.Add(newCustom);
             addCustomerToListbox();
+        }
+
+        void addFailedCustomer(string file)
+        {
+            customer newCustom = new customer(0, "", "", "", "", 0);
+            if (WaitForFile(pathReadyCustomer + @"\" + file, FileMode.Open, FileAccess.Read))
+            {
+                string[] lines = System.IO.File.ReadAllLines(pathReadyCustomer + @"\" + file);
+                if (lines[8].Contains("Failed"))
+                {
+                    newCustom.ID = Convert.ToInt32(lines[0]);
+                    newCustom.Name = lines[1] + " - " + lines[2];
+                    newCustom.Mail = lines[4];
+                    newCustom.Song = lines[5];
+                    if (File.Exists(pathReadyCustomer + @"\" + newCustom.ID + ".mp4"))
+                        newCustom.Video = newCustom.ID + ".mp4";
+                    else
+                        newCustom.Video = lines[7];
+                    if (lines[8].Contains("Failed"))
+                        newCustom.Status = (byte)customerStatus.Failed;
+                    listBoxFailed.Items.Add(newCustom.ID + "|" + newCustom.Name + "|" + newCustom.Mail + "|" + newCustom.Song + "|" + newCustom.Status);
+                    registrationList.Add(newCustom);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cant read existing File: " + file);
+            }
         }
 
         private void addCustomerToListbox()
@@ -123,11 +152,11 @@ namespace VideoUploader
                     else
                         MessageBox.Show("Cant access " + pathCustomer + @"\" + cust.ID + ".txt");
                     if (WaitForFile(pathCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
-                        File.Copy(pathCustomer + @"\" + cust.ID + ".txt", pathReadyCustomer + @"\" + cust.ID + ".txt");
+                        File.Move(pathCustomer + @"\" + cust.ID + ".txt", pathReadyCustomer + @"\" + cust.ID + ".txt");
                     else
                         MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
                     if (WaitForFile(cust.Video, FileMode.Open, FileAccess.Read))
-                        File.Copy(cust.Video, pathReadyCustomer + @"\" + cust.ID + ".mp4");
+                        File.Move(cust.Video, pathReadyCustomer + @"\" + cust.ID + ".mp4");
                     else
                         MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
                     setReady();
@@ -208,17 +237,42 @@ namespace VideoUploader
                 return;
             }
 
-            try {
+            try
+            {
                 DirectoryInfo d = new DirectoryInfo(pathCustomer);
                 foreach (var file in d.GetFiles("*.txt"))
                 {
                     addCustomer(file.Name);
                 }
-                
-            } catch (Exception ex)
-            {
 
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant add existing Files: " + ex.Message);
+            }
+
+
+            try
+            {
+                DirectoryInfo d = new DirectoryInfo(pathReadyCustomer);
+                foreach (var file in d.GetFiles("*.txt"))
+                {
+                    try
+                    {
+                        addFailedCustomer(file.Name);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Cant read existing File: " + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant add existing Files: " + ex.Message);
+            }
+
+
             try
             {
                 FSW_Initialisieren();
@@ -302,7 +356,19 @@ namespace VideoUploader
                         { "videouploaded", "true"},
                     });
                     string res = System.Text.Encoding.UTF8.GetString(response);
-                    cust.Status = (byte)customerStatus.Success;
+                    cust.Status = (byte)customerStatus.Final;
+
+                    if (WaitForFile(pathReadyCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
+                    {
+                        string lines = System.IO.File.ReadAllText(pathReadyCustomer + @"\" + cust.ID + ".txt");
+                        if (lines.Contains("Failed"))
+                            File.WriteAllText(pathReadyCustomer + @"\" + cust.ID + ".txt", lines.Replace("Failed", "Success"));
+                        else
+                            File.AppendAllText(pathReadyCustomer + @"\" + cust.ID + ".txt", "Success\n");
+                    }
+                    else
+                        MessageBox.Show("Cant access " + pathReadyCustomer + @"\" + cust.ID + ".txt");
+
                     for (int i = 0; i < listBoxUpload.Items.Count; i++)
                     {
                         if (Convert.ToInt32(listBoxUpload.Items[i].ToString().Split('|')[0]) == cust.ID)
@@ -312,6 +378,22 @@ namespace VideoUploader
             }
         }
 
+        private void buttonRetry_Click(object sender, EventArgs e)
+        {
+            foreach (customer cust in registrationList)
+            {
+                if (cust.Status == (byte)customerStatus.Failed)
+                {
+                    cust.Status = (byte)customerStatus.Wait;
+                    listBoxReady.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    for (int i = 0; i < listBoxReady.Items.Count; i++)
+                    {
+                        if (Convert.ToInt32(listBoxFailed.Items[i].ToString().Split('|')[0]) == cust.ID)
+                            listBoxFailed.Items.RemoveAt(i);
+                    }
+                }
+            }
+        }
 
         private void setFailed()
         {
@@ -326,6 +408,10 @@ namespace VideoUploader
                 {
                     listBoxFailed.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
                     cust.Status = (byte)customerStatus.Failed;
+                    if (WaitForFile(pathCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
+                        File.AppendAllText(pathCustomer + @"\" + cust.ID + ".txt", "Failed\n");
+                    else
+                        MessageBox.Show("Cant access " + pathCustomer + @"\" + cust.ID + ".txt");
                     for (int i = 0; i < listBoxUpload.Items.Count; i++)
                     {
                         if (Convert.ToInt32(listBoxUpload.Items[i].ToString().Split('|')[0]) == cust.ID)
@@ -347,7 +433,8 @@ namespace VideoUploader
                     {
                         cust.Status = (byte)customerStatus.Selected;
                         textBoxCustomer.Text = cust.ID.ToString() + " | " + cust.Name;
-                        try {
+                        try
+                        {
                             writeToPNG(imageText + selectedCustomer, pathImageIn, pathImageOut, imageTextPos, imageTextSize);
                         }
                         catch (Exception ex)
