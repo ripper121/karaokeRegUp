@@ -151,14 +151,6 @@ namespace VideoUploader
                         File.AppendAllText(pathCustomer + @"\" + cust.ID + ".txt", cust.Video + "\n");
                     else
                         MessageBox.Show("Cant access " + pathCustomer + @"\" + cust.ID + ".txt");
-                    if (WaitForFile(pathCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
-                        File.Move(pathCustomer + @"\" + cust.ID + ".txt", pathReadyCustomer + @"\" + cust.ID + ".txt");
-                    else
-                        MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
-                    if (WaitForFile(cust.Video, FileMode.Open, FileAccess.Read))
-                        File.Move(cust.Video, pathReadyCustomer + @"\" + cust.ID + ".mp4");
-                    else
-                        MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
                     setReady();
                 }
             }
@@ -482,6 +474,14 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Wait)
                 {
+                    if (WaitForFile(pathCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
+                        File.Move(pathCustomer + @"\" + cust.ID + ".txt", pathReadyCustomer + @"\" + cust.ID + ".txt");
+                    else
+                        MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
+                    if (WaitForFile(cust.Video, FileMode.Open, FileAccess.Read))
+                        File.Move(cust.Video, pathReadyCustomer + @"\" + cust.ID + ".mp4");
+                    else
+                        MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
                     FtpAsync(ftpUserName, ftpPassword, ftpBaseUri, pathReadyCustomer + @"\" + cust.ID + ".mp4", cust.ID);
                     cust.Status = (byte)customerStatus.Upload;
                     listBoxUpload.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
