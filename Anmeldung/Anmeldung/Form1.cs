@@ -73,6 +73,8 @@ namespace Anmeldung
                 dataGridView1.DataSource = MusicDataTable;
                 dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Ascending);
                 dataGridView1.Columns["ID"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView1.Columns["ID"].Width = 1;
+                dataGridView1.Columns["ID"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -226,11 +228,82 @@ namespace Anmeldung
                 MessageBox.Show("Bitte valide Mail verwenden: mymail@mydomain.com");
                 return;
             }
-            textBoxDiscl.Text = disclaimer;
-            textBoxDiscl.Visible = true;
-            buttonOK.Visible = true;
-            buttonAbort.Visible = true;
-            dataGridView1.Visible = false;
+
+            if (checkBoxAGB.Checked)
+            {
+                String User = "";
+                String timestamp = ((Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
+
+                User += CustomerCount.ToString() + "\n";
+                User += textBox2.Text + "\n";
+                User += textBox6.Text + "\n";
+                User += dateTimePicker1.Text + "\n";
+                User += textBox3.Text + "\n";
+                User += textBox4.Text + "\n";
+                User += timestamp + "\n";
+
+                try
+                {
+                    var response = Http.Post(registrationURL, new NameValueCollection() {
+                        { "user_id", CustomerCount.ToString() },
+                        { "user_name", textBox2.Text },
+                        { "user_lastname", textBox6.Text },
+                        { "user_birthdate", dateTimePicker1.Text },
+                        { "user_email", textBox3.Text },
+                        { "user_createtimestamp", timestamp}
+                    });
+                    if (System.Text.Encoding.Default.GetString(response).Contains("existing_user_login"))
+                    {
+                        MessageBox.Show("Your Mail >" + textBox3.Text + "< is allready in use!");
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Cant request WebService:" + ex.Message);
+                }
+
+                try
+                {
+                    File.WriteAllText(customerFolder + CustomerCount.ToString() + ".txt", User);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Can't write to CustomerFolder.");
+                }
+                finally
+                {
+                    try
+                    {
+                        CustomerCount++;
+                        updateSetting("CustomerCount", CustomerCount.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Can't write to config.");
+                    }
+                    finally
+                    {
+                        MessageBox.Show("Ihre Nummer Lautet: " + (CustomerCount - 1).ToString() + "\nBitte merken!");
+
+                        label6.Text = (CustomerCount).ToString();
+                        textBox1.Text = "";
+                        textBox2.Text = "";
+                        textBox3.Text = "";
+                        textBox4.Text = "";
+                        textBox5.Text = "";
+                        textBox6.Text = "";
+                        textBoxDiscl.Visible = false;
+                        buttonOK.Visible = false;
+                        dataGridView1.Visible = true;
+                        checkBoxAGB.Checked = true;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bitte Akzeptieren sie die AGBs um fortzufahren.");
+            }
         }
 
         private void updateSetting(string key, string value)
@@ -281,82 +354,19 @@ namespace Anmeldung
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            String User = "";
-            String timestamp = ((Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
-
-            User += CustomerCount.ToString() + "\n";
-            User += textBox2.Text + "\n";
-            User += textBox6.Text + "\n";
-            User += dateTimePicker1.Text + "\n";
-            User += textBox3.Text + "\n";
-            User += textBox4.Text + "\n";
-            User += timestamp + "\n";
-
-            try
-            {
-                var response = Http.Post(registrationURL, new NameValueCollection() {
-                        { "user_id", CustomerCount.ToString() },
-                        { "user_name", textBox2.Text },
-                        { "user_lastname", textBox6.Text },
-                        { "user_birthdate", dateTimePicker1.Text },
-                        { "user_email", textBox3.Text },
-                        { "user_createtimestamp", timestamp}
-                    });
-                if (System.Text.Encoding.Default.GetString(response).Contains("existing_user_login"))
-                {
-                    MessageBox.Show("Your Mail >" + textBox3.Text + "< is allready in use!");
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Cant request WebService:" + ex.Message);
-            }
-
-            try
-            {
-                File.WriteAllText(customerFolder + CustomerCount.ToString() + ".txt", User);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can't write to CustomerFolder.");
-            }
-            finally
-            {
-                try
-                {
-                    CustomerCount++;
-                    updateSetting("CustomerCount", CustomerCount.ToString());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Can't write to config.");
-                }
-                finally
-                {
-                    MessageBox.Show("Ihre Nummer Lautet: " + (CustomerCount - 1).ToString() + "\nBitte merken!");
-
-                    label6.Text = (CustomerCount).ToString();
-                    textBox1.Text = "";
-                    textBox2.Text = "";
-                    textBox3.Text = "";
-                    textBox4.Text = "";
-                    textBox5.Text = "";
-                    textBox6.Text = "";
-                    textBoxDiscl.Visible = false;
-                    buttonOK.Visible = false;
-                    buttonAbort.Visible = false;
-                    dataGridView1.Visible = true;
-                }
-            }
-        }
-
-        private void buttonAbort_Click(object sender, EventArgs e)
-        {
+            textBoxDiscl.Text = "";
             textBoxDiscl.Visible = false;
             buttonOK.Visible = false;
-            buttonAbort.Visible = false;
             dataGridView1.Visible = true;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBoxDiscl.Text = disclaimer;
+            textBoxDiscl.Visible = true;
+            buttonOK.Visible = true;
+            dataGridView1.Visible = false;
+        }
+
     }
 }
