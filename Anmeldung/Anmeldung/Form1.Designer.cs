@@ -60,6 +60,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonID = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -89,6 +91,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.textBox6);
@@ -155,7 +159,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Crimson;
-            this.label6.Location = new System.Drawing.Point(545, 105);
+            this.label6.Location = new System.Drawing.Point(665, 93);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 55);
             this.label6.TabIndex = 99;
@@ -164,7 +168,7 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(367, 99);
+            this.label5.Location = new System.Drawing.Point(487, 87);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(172, 61);
             this.label5.TabIndex = 99;
@@ -207,9 +211,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(6, 146);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 25);
+            this.label2.Size = new System.Drawing.Size(85, 25);
             this.label2.TabIndex = 99;
-            this.label2.Text = "E-Mail:";
+            this.label2.Text = "E-Mail: ";
             // 
             // textBox2
             // 
@@ -396,7 +400,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::Anmeldung.Properties.Resources.Hyundai;
+            this.pictureBox2.Image = global::Anmeldung.Properties.Resources.Anmeldeoverlay;
             this.pictureBox2.Location = new System.Drawing.Point(750, 234);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(484, 178);
@@ -424,7 +428,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(65)))));
-            this.label10.Location = new System.Drawing.Point(12, 9);
+            this.label10.Location = new System.Drawing.Point(1142, 465);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(1413, 661);
             this.label10.TabIndex = 110;
@@ -455,11 +459,32 @@
             this.buttonID.Visible = false;
             this.buttonID.Click += new System.EventHandler(this.buttonID_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(83, 149);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(644, 20);
+            this.label11.TabIndex = 100;
+            this.label11.Text = "(An diese Adresse wird der Link versendet, unter dem das Video angesehen werden k" +
+    "ann)";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(80, 212);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(392, 20);
+            this.label12.TabIndex = 101;
+            this.label12.Text = "(Tragen Sie hier Teile des Liedes oder Interpreten ein.)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1437, 766);
             this.Controls.Add(this.buttonID);
             this.Controls.Add(this.label10);
@@ -528,6 +553,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button buttonID;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }
 

@@ -38,12 +38,12 @@
             this.listBoxReady = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonRetry = new System.Windows.Forms.Button();
             this.listBoxUpload = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonRetry = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -162,6 +162,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Upload";
             // 
+            // buttonRetry
+            // 
+            this.buttonRetry.Location = new System.Drawing.Point(6, 556);
+            this.buttonRetry.Name = "buttonRetry";
+            this.buttonRetry.Size = new System.Drawing.Size(123, 23);
+            this.buttonRetry.TabIndex = 16;
+            this.buttonRetry.Text = "Retry";
+            this.buttonRetry.UseVisualStyleBackColor = true;
+            this.buttonRetry.Click += new System.EventHandler(this.buttonRetry_Click);
+            // 
             // listBoxUpload
             // 
             this.listBoxUpload.FormattingEnabled = true;
@@ -206,16 +216,6 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Bereit zum Upload:";
             // 
-            // buttonRetry
-            // 
-            this.buttonRetry.Location = new System.Drawing.Point(6, 556);
-            this.buttonRetry.Name = "buttonRetry";
-            this.buttonRetry.Size = new System.Drawing.Size(123, 23);
-            this.buttonRetry.TabIndex = 16;
-            this.buttonRetry.Text = "Retry";
-            this.buttonRetry.UseVisualStyleBackColor = true;
-            this.buttonRetry.Click += new System.EventHandler(this.buttonRetry_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,7 +224,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "SingingCar-Video Upload";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

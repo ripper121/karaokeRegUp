@@ -351,7 +351,8 @@ namespace VideoUploader
                             { "videouploaded", "true"},
                         });
                         string res = System.Text.Encoding.UTF8.GetString(response);
-                        MessageBox.Show(res);
+                        if(res.ToLower().Contains("error"))
+                            MessageBox.Show(res);
                     }
                     catch (Exception Ex)
                     {
@@ -436,9 +437,12 @@ namespace VideoUploader
                         textBoxCustomer.Text = cust.ID.ToString() + " | " + cust.Name;
                         try
                         {
-                            if (WaitForFile(pathImageOut, FileMode.Open, FileAccess.Read))
-                                File.Delete(pathImageOut);
-                            writeToPNG(imageText + selectedCustomer, pathImageIn, pathImageOut, imageTextPos, imageTextSize);
+                                File.Copy(pathImageIn, pathImageOut,true);
+                                if (WaitForFile(pathImageOut, FileMode.Open, FileAccess.Read))
+                                    writeToPNG(imageText + selectedCustomer, pathImageIn, pathImageOut, imageTextPos, imageTextSize);
+                                else
+                                    MessageBox.Show("Can't write to Output Image: " + pathImageOut);
+                            
                         }
                         catch (Exception ex)
                         {
@@ -469,7 +473,7 @@ namespace VideoUploader
                                    GraphicsUnit.Pixel);
             graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             graphics.DrawString(text, font, Brushes.Black, pos.X, pos.Y);
-
+            
             b.Save(fileOut, image.RawFormat);
 
             image.Dispose();

@@ -71,7 +71,7 @@ namespace Anmeldung
                 MusicDataTable = ConvertCSVtoDataTable(SongFile);
 
                 dataGridView1.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 16);
-                dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(64,64,64);
+                dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(0,0,0);
                 dataGridView1.DefaultCellStyle.ForeColor = Color.White;
                 dataGridView1.AutoResizeColumns();
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -80,6 +80,13 @@ namespace Anmeldung
                 dataGridView1.Columns["ID"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dataGridView1.Columns["ID"].Width = 1;
                 dataGridView1.Columns["ID"].Visible = false;
+                dataGridView1.EnableHeadersVisualStyles = false;
+                dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
+                dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+                dataGridView1.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 17);
+                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
+                dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 17);
             }
             catch (Exception ex)
             {
@@ -97,6 +104,7 @@ namespace Anmeldung
             groupBox1.ForeColor = Color.White;
             groupBox2.ForeColor = Color.White;
             label6.Text = CustomerCount.ToString();
+            textBoxDiscl.Font = new Font("Microsoft Sans Serif", 16);
             Cursor.Current = Cursors.Default;
             
 
@@ -225,6 +233,16 @@ namespace Anmeldung
             }
         }
 
+        int GetAge(DateTime bornDate)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - bornDate.Year;
+            if (bornDate > today.AddYears(-age))
+                age--;
+
+            return age;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBox2.Text.Trim()) || String.IsNullOrEmpty(textBox3.Text.Trim()) || String.IsNullOrEmpty(textBox4.Text.Trim()))
@@ -235,6 +253,12 @@ namespace Anmeldung
             if (!textBox3.Text.Contains('@'))
             {
                 MessageBox.Show("Bitte valide Mail verwenden: mymail@mydomain.com");
+                return;
+            }
+
+            if (GetAge(dateTimePicker1.Value.Date) < 18)
+            {
+                MessageBox.Show("Sie müssen min. 18 Jahre alt sein!");
                 return;
             }
 
@@ -267,7 +291,7 @@ namespace Anmeldung
                     {
                         MessageBox.Show("Your Mail >" + textBox3.Text + "< is allready in use!");
                         return;
-                    }else if (System.Text.Encoding.Default.GetString(response).Contains("error"))
+                    }else if (System.Text.Encoding.Default.GetString(response).ToLower().Contains("error"))
                     {
                         MessageBox.Show("WebService Error " + textBox3.Text);
                         return;

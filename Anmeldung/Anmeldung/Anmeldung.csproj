@@ -93,6 +93,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Anmeldeoverlay.png" />
     <Content Include="Hyundai.png" />
     <Content Include="icon-anmelden.ico" />
     <None Include="Resources\CustomFont.bmp" />

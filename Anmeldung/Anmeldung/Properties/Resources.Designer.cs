@@ -63,6 +63,16 @@ namespace Anmeldung.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Anmeldeoverlay {
+            get {
+                object obj = ResourceManager.GetObject("Anmeldeoverlay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Hyundai {
             get {
                 object obj = ResourceManager.GetObject("Hyundai", resourceCulture);
