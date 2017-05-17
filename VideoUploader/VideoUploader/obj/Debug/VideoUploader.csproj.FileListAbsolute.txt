@@ -16,3 +16,12 @@ C:\Users\sts\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug
 C:\Users\sts\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.csproj.GenerateResource.Cache
 C:\Users\sts\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.exe
 C:\Users\sts\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.pdb
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\bin\Debug\VideoUploader.exe.config
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\bin\Debug\VideoUploader.exe
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\bin\Debug\VideoUploader.pdb
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.csprojResolveAssemblyReference.cache
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.Form1.resources
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.Properties.Resources.resources
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.csproj.GenerateResource.Cache
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.exe
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\VideoUploader\VideoUploader\obj\Debug\VideoUploader.pdb

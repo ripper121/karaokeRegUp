@@ -174,6 +174,7 @@ namespace VideoUploader
                         if (Convert.ToInt32(listBoxAnmeldung.Items[i].ToString().Split('|')[0]) == cust.ID)
                             listBoxAnmeldung.Items.RemoveAt(i);
                     }
+                    textBoxCustomer.Text = "";
                 }
             }
         }
@@ -185,6 +186,7 @@ namespace VideoUploader
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             try
             {
                 config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
@@ -200,7 +202,6 @@ namespace VideoUploader
                 ftpPassword = config.AppSettings.Settings["ftpPassword"].Value;
                 ftpBaseUri = config.AppSettings.Settings["ftpBaseUri"].Value;
                 httpBaseUri = config.AppSettings.Settings["httpBaseUri"].Value;
-
 
                 if (!Directory.Exists(pathCustomer))
                 {
@@ -343,11 +344,19 @@ namespace VideoUploader
                 if (cust.Status == (byte)customerStatus.Success)
                 {
                     listBoxSuccess.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
-                    var response = Http.Post(httpBaseUri, new NameValueCollection() {
-                        { "user_id", cust.ID.ToString() },
-                        { "videouploaded", "true"},
-                    });
-                    string res = System.Text.Encoding.UTF8.GetString(response);
+                    try
+                    {
+                        var response = Http.Post(httpBaseUri, new NameValueCollection() {
+                            { "user_id", cust.ID.ToString() },
+                            { "videouploaded", "true"},
+                        });
+                        string res = System.Text.Encoding.UTF8.GetString(response);
+                        MessageBox.Show(res);
+                    }
+                    catch (Exception Ex)
+                    {
+                        MessageBox.Show(Ex.Message);
+                    }
                     cust.Status = (byte)customerStatus.Final;
 
                     if (WaitForFile(pathReadyCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))

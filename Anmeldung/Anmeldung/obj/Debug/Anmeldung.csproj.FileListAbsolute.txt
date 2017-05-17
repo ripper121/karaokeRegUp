@@ -16,3 +16,12 @@ C:\Users\sts\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldu
 C:\Users\sts\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.Form1.resources
 C:\Users\sts\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.Properties.Resources.resources
 C:\Users\sts\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.csproj.GenerateResource.Cache
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\bin\Debug\Anmeldung.exe.config
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\bin\Debug\Anmeldung.exe
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\bin\Debug\Anmeldung.pdb
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.csprojResolveAssemblyReference.cache
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.Form1.resources
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.Properties.Resources.resources
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.csproj.GenerateResource.Cache
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.exe
+C:\Users\ripper121\Documents\GitHub\karaokeRegUp\Anmeldung\Anmeldung\obj\Debug\Anmeldung.pdb

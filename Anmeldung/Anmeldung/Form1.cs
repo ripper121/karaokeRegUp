@@ -12,6 +12,7 @@ using System.Configuration;
 using System.Collections.Specialized;
 using System.Net;
 using System.Threading;
+using System.Drawing.Text;
 
 namespace Anmeldung
 {
@@ -68,6 +69,10 @@ namespace Anmeldung
             {
                 Cursor.Current = Cursors.WaitCursor;
                 MusicDataTable = ConvertCSVtoDataTable(SongFile);
+
+                dataGridView1.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 16);
+                dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(64,64,64);
+                dataGridView1.DefaultCellStyle.ForeColor = Color.White;
                 dataGridView1.AutoResizeColumns();
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dataGridView1.DataSource = MusicDataTable;
@@ -89,8 +94,12 @@ namespace Anmeldung
             this.Width = Screen.PrimaryScreen.Bounds.Width + 16;
             this.Height = Screen.PrimaryScreen.Bounds.Height - 270;
             this.FormBorderStyle = FormBorderStyle.None;
+            groupBox1.ForeColor = Color.White;
+            groupBox2.ForeColor = Color.White;
             label6.Text = CustomerCount.ToString();
             Cursor.Current = Cursors.Default;
+            
+
         }
 
         public static DataTable ConvertCSVtoDataTable(string strFilePath)
@@ -250,11 +259,17 @@ namespace Anmeldung
                         { "user_lastname", textBox6.Text },
                         { "user_birthdate", dateTimePicker1.Text },
                         { "user_email", textBox3.Text },
-                        { "user_createtimestamp", timestamp}
+                        { "user_createtimestamp", timestamp},
+                        { "second_mail", "true"},
+                        { "marketing_mail", "true"}
                     });
                     if (System.Text.Encoding.Default.GetString(response).Contains("existing_user_login"))
                     {
                         MessageBox.Show("Your Mail >" + textBox3.Text + "< is allready in use!");
+                        return;
+                    }else if (System.Text.Encoding.Default.GetString(response).Contains("error"))
+                    {
+                        MessageBox.Show("WebService Error " + textBox3.Text);
                         return;
                     }
                 }
@@ -284,19 +299,11 @@ namespace Anmeldung
                     }
                     finally
                     {
-                        MessageBox.Show("Ihre Nummer Lautet: " + (CustomerCount - 1).ToString() + "\nBitte merken!");
-
+                        dataGridView1.Visible = false;
                         label6.Text = (CustomerCount).ToString();
-                        textBox1.Text = "";
-                        textBox2.Text = "";
-                        textBox3.Text = "";
-                        textBox4.Text = "";
-                        textBox5.Text = "";
-                        textBox6.Text = "";
-                        textBoxDiscl.Visible = false;
-                        buttonOK.Visible = false;
-                        dataGridView1.Visible = true;
-                        checkBoxAGB.Checked = true;
+                        label10.Text = "Ihre Nummer Lautet: " + (CustomerCount - 1).ToString() + "\nBitte merken!";
+                        label10.Visible = true;
+                        buttonID.Visible = true;
                     }
                 }
             }
@@ -358,6 +365,7 @@ namespace Anmeldung
             textBoxDiscl.Visible = false;
             buttonOK.Visible = false;
             dataGridView1.Visible = true;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -368,5 +376,25 @@ namespace Anmeldung
             dataGridView1.Visible = false;
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void buttonID_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBoxDiscl.Visible = false;
+            buttonOK.Visible = false;
+            dataGridView1.Visible = true;
+            checkBoxAGB.Checked = true;
+            label10.Visible = false;
+            buttonID.Visible = false;
+        }
     }
 }
