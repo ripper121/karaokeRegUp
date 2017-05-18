@@ -31,8 +31,20 @@ namespace Anmeldung
         String ClosePassword = null;
         String registrationURL = "";
         String disclaimer = "";
+        PrivateFontCollection fonts;
+        FontFamily family;
+        Font theFont_Big;
+        Font theFont_Small;
+        Font theFont_Smaller;
 
         private Configuration config = null;
+
+        public static FontFamily LoadFontFamily(string fileName, out PrivateFontCollection fontCollection)
+        {
+            fontCollection = new PrivateFontCollection();
+            fontCollection.AddFontFile(fileName);
+            return fontCollection.Families[0];
+        }
 
         public Form1()
         {
@@ -43,6 +55,11 @@ namespace Anmeldung
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            FontFamily family = LoadFontFamily(Application.StartupPath + @"\Fonts\HyundaiSansTextOffice-Regular.ttf", out fonts);
+            Font theFont_Big = new Font(family, 15.0f);
+            Font theFont_Small = new Font(family, 8.0f);
+            Font theFont_Bigger = new Font(family, 25.0f);
+
             try
             {
                 config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
@@ -70,8 +87,8 @@ namespace Anmeldung
                 Cursor.Current = Cursors.WaitCursor;
                 MusicDataTable = ConvertCSVtoDataTable(SongFile);
 
-                dataGridView1.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 16);
-                dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(0,0,0);
+                dataGridView1.DefaultCellStyle.Font = theFont_Big;
+                dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(0, 44, 95);
                 dataGridView1.DefaultCellStyle.ForeColor = Color.White;
                 dataGridView1.AutoResizeColumns();
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -81,12 +98,12 @@ namespace Anmeldung
                 dataGridView1.Columns["ID"].Width = 1;
                 dataGridView1.Columns["ID"].Visible = false;
                 dataGridView1.EnableHeadersVisualStyles = false;
-                dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
+                dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 44, 95);
                 dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                dataGridView1.RowHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 17);
-                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
+                dataGridView1.RowHeadersDefaultCellStyle.Font = theFont_Big;
+                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 44, 95);
                 dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 17);
+                dataGridView1.ColumnHeadersDefaultCellStyle.Font = theFont_Big;
             }
             catch (Exception ex)
             {
@@ -106,8 +123,33 @@ namespace Anmeldung
             label6.Text = CustomerCount.ToString();
             textBoxDiscl.Font = new Font("Microsoft Sans Serif", 16);
             Cursor.Current = Cursors.Default;
-            
 
+            groupBox1.Font = theFont_Big;
+            label11.Font = theFont_Small;
+            dateTimePicker1.Font = theFont_Big;
+            label9.Font = theFont_Big;
+            textBox6.Font = theFont_Big;
+            label3.Font = theFont_Big;
+            label6.Font = theFont_Bigger;
+            label5.Font = theFont_Big;
+            textBox4.Font = theFont_Big;
+            label4.Font = theFont_Big;
+            textBox3.Font = theFont_Big;
+            label2.Font = theFont_Big;
+            textBox2.Font = theFont_Big;
+            label1.Font = theFont_Big;
+            button1.Font = theFont_Big;
+            groupBox2.Font = theFont_Big;
+            textBox1.Font = theFont_Big;
+            textBox5.Font = theFont_Big;
+            label8.Font = theFont_Big;
+            label7.Font = theFont_Big;
+            buttonReset.Font = theFont_Big;
+            buttonOK.Font = theFont_Big;
+            label10.Font = theFont_Bigger;
+            buttonID.Font = theFont_Big;
+            myCheckBox3.Font = theFont_Small;
+            checkBoxAGB.Font = theFont_Small;
         }
 
         public static DataTable ConvertCSVtoDataTable(string strFilePath)
@@ -245,7 +287,7 @@ namespace Anmeldung
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBox2.Text.Trim()) || String.IsNullOrEmpty(textBox3.Text.Trim()) || String.IsNullOrEmpty(textBox4.Text.Trim()))
+            if (String.IsNullOrEmpty(textBox2.Text.Trim()) || String.IsNullOrEmpty(textBox3.Text.Trim()) || String.IsNullOrEmpty(textBox4.Text.Trim()) || String.IsNullOrEmpty(textBox6.Text.Trim()))
             {
                 MessageBox.Show("Bitte alle Felder ausfüllen.");
                 return;
@@ -266,6 +308,9 @@ namespace Anmeldung
             {
                 String User = "";
                 String timestamp = ((Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
+                String newsletter = "false";
+                if (myCheckBox3.Checked)
+                    newsletter = "true";
 
                 User += CustomerCount.ToString() + "\n";
                 User += textBox2.Text + "\n";
@@ -277,6 +322,7 @@ namespace Anmeldung
 
                 try
                 {
+
                     var response = Http.Post(registrationURL, new NameValueCollection() {
                         { "user_id", CustomerCount.ToString() },
                         { "user_name", textBox2.Text },
@@ -285,13 +331,14 @@ namespace Anmeldung
                         { "user_email", textBox3.Text },
                         { "user_createtimestamp", timestamp},
                         { "second_mail", "true"},
-                        { "marketing_mail", "true"}
+                        { "marketing_mail", newsletter}
                     });
                     if (System.Text.Encoding.Default.GetString(response).Contains("existing_user_login"))
                     {
                         MessageBox.Show("Your Mail >" + textBox3.Text + "< is allready in use!");
                         return;
-                    }else if (System.Text.Encoding.Default.GetString(response).ToLower().Contains("error"))
+                    }
+                    else if (System.Text.Encoding.Default.GetString(response).ToLower().Contains("error"))
                     {
                         MessageBox.Show("WebService Error " + textBox3.Text);
                         return;
@@ -402,7 +449,7 @@ namespace Anmeldung
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           
+
         }
 
         private void buttonID_Click(object sender, EventArgs e)
@@ -416,9 +463,11 @@ namespace Anmeldung
             textBoxDiscl.Visible = false;
             buttonOK.Visible = false;
             dataGridView1.Visible = true;
-            checkBoxAGB.Checked = true;
+            checkBoxAGB.Checked = false;
             label10.Visible = false;
             buttonID.Visible = false;
+            dateTimePicker1.CustomFormat = "dd.MM.yyyy";
+            dateTimePicker1.Value = DateTime.Now;
         }
     }
 }
