@@ -50,9 +50,10 @@
             // 
             // buttonSelect
             // 
+            this.buttonSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSelect.Location = new System.Drawing.Point(6, 160);
             this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(123, 23);
+            this.buttonSelect.Size = new System.Drawing.Size(123, 31);
             this.buttonSelect.TabIndex = 0;
             this.buttonSelect.Text = "Select";
             this.buttonSelect.UseVisualStyleBackColor = true;
@@ -62,40 +63,47 @@
             // 
             this.listBoxSuccess.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxSuccess.FormattingEnabled = true;
             this.listBoxSuccess.HorizontalScrollbar = true;
+            this.listBoxSuccess.ItemHeight = 20;
             this.listBoxSuccess.Location = new System.Drawing.Point(6, 315);
             this.listBoxSuccess.Name = "listBoxSuccess";
-            this.listBoxSuccess.Size = new System.Drawing.Size(696, 108);
+            this.listBoxSuccess.Size = new System.Drawing.Size(696, 104);
             this.listBoxSuccess.TabIndex = 2;
             // 
             // listBoxFailed
             // 
             this.listBoxFailed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxFailed.FormattingEnabled = true;
             this.listBoxFailed.HorizontalScrollbar = true;
+            this.listBoxFailed.ItemHeight = 20;
             this.listBoxFailed.Location = new System.Drawing.Point(6, 442);
             this.listBoxFailed.Name = "listBoxFailed";
-            this.listBoxFailed.Size = new System.Drawing.Size(696, 108);
+            this.listBoxFailed.Size = new System.Drawing.Size(696, 104);
             this.listBoxFailed.TabIndex = 3;
             // 
             // listBoxAnmeldung
             // 
             this.listBoxAnmeldung.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxAnmeldung.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxAnmeldung.FormattingEnabled = true;
             this.listBoxAnmeldung.HorizontalScrollbar = true;
-            this.listBoxAnmeldung.Location = new System.Drawing.Point(6, 19);
+            this.listBoxAnmeldung.ItemHeight = 20;
+            this.listBoxAnmeldung.Location = new System.Drawing.Point(10, 24);
             this.listBoxAnmeldung.Name = "listBoxAnmeldung";
-            this.listBoxAnmeldung.Size = new System.Drawing.Size(696, 108);
+            this.listBoxAnmeldung.Size = new System.Drawing.Size(696, 104);
             this.listBoxAnmeldung.TabIndex = 4;
             // 
             // buttonUpload
             // 
-            this.buttonUpload.Location = new System.Drawing.Point(6, 146);
+            this.buttonUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUpload.Location = new System.Drawing.Point(579, 151);
             this.buttonUpload.Name = "buttonUpload";
-            this.buttonUpload.Size = new System.Drawing.Size(123, 23);
+            this.buttonUpload.Size = new System.Drawing.Size(123, 26);
             this.buttonUpload.TabIndex = 6;
             this.buttonUpload.Text = "Upload";
             this.buttonUpload.UseVisualStyleBackColor = true;
@@ -105,18 +113,20 @@
             // 
             this.textBoxCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCustomer.Location = new System.Drawing.Point(131, 133);
+            this.textBoxCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCustomer.Location = new System.Drawing.Point(150, 133);
             this.textBoxCustomer.Name = "textBoxCustomer";
             this.textBoxCustomer.ReadOnly = true;
-            this.textBoxCustomer.Size = new System.Drawing.Size(571, 20);
+            this.textBoxCustomer.Size = new System.Drawing.Size(555, 26);
             this.textBoxCustomer.TabIndex = 7;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(5, 136);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.Size = new System.Drawing.Size(149, 20);
             this.label1.TabIndex = 8;
             this.label1.Text = "Selected Customer:";
             // 
@@ -124,10 +134,12 @@
             // 
             this.listBoxReady.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxReady.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxReady.FormattingEnabled = true;
-            this.listBoxReady.Location = new System.Drawing.Point(6, 32);
+            this.listBoxReady.ItemHeight = 20;
+            this.listBoxReady.Location = new System.Drawing.Point(6, 41);
             this.listBoxReady.Name = "listBoxReady";
-            this.listBoxReady.Size = new System.Drawing.Size(696, 108);
+            this.listBoxReady.Size = new System.Drawing.Size(696, 104);
             this.listBoxReady.TabIndex = 10;
             // 
             // groupBox1
@@ -136,9 +148,10 @@
             this.groupBox1.Controls.Add(this.textBoxCustomer);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.buttonSelect);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(712, 191);
+            this.groupBox1.Size = new System.Drawing.Size(712, 197);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Neuanmeldung";
@@ -155,6 +168,7 @@
             this.groupBox2.Controls.Add(this.listBoxReady);
             this.groupBox2.Controls.Add(this.listBoxSuccess);
             this.groupBox2.Controls.Add(this.listBoxFailed);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 209);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(713, 594);
@@ -164,9 +178,10 @@
             // 
             // buttonRetry
             // 
+            this.buttonRetry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRetry.Location = new System.Drawing.Point(6, 556);
             this.buttonRetry.Name = "buttonRetry";
-            this.buttonRetry.Size = new System.Drawing.Size(123, 23);
+            this.buttonRetry.Size = new System.Drawing.Size(123, 32);
             this.buttonRetry.TabIndex = 16;
             this.buttonRetry.Text = "Retry";
             this.buttonRetry.UseVisualStyleBackColor = true;
@@ -174,45 +189,51 @@
             // 
             // listBoxUpload
             // 
+            this.listBoxUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxUpload.FormattingEnabled = true;
+            this.listBoxUpload.ItemHeight = 20;
             this.listBoxUpload.Location = new System.Drawing.Point(6, 188);
             this.listBoxUpload.Name = "listBoxUpload";
-            this.listBoxUpload.Size = new System.Drawing.Size(696, 108);
+            this.listBoxUpload.Size = new System.Drawing.Size(696, 104);
             this.listBoxUpload.TabIndex = 15;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 172);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 167);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.Size = new System.Drawing.Size(86, 20);
             this.label5.TabIndex = 14;
             this.label5.Text = "Im Upload:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 426);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 421);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 13);
+            this.label4.Size = new System.Drawing.Size(126, 20);
             this.label4.TabIndex = 13;
             this.label4.Text = "Fehlgeschlagen:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 299);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 294);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.Size = new System.Drawing.Size(67, 20);
             this.label3.TabIndex = 12;
             this.label3.Text = "Erledigt:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 13);
+            this.label2.Size = new System.Drawing.Size(144, 20);
             this.label2.TabIndex = 11;
             this.label2.Text = "Bereit zum Upload:";
             // 
@@ -220,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 815);
+            this.ClientSize = new System.Drawing.Size(737, 837);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";

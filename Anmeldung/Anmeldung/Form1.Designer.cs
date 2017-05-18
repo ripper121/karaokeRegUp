@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonID = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.myCheckBox1 = new MyCheckBox();
             this.myCheckBox3 = new MyCheckBox();
             this.checkBoxAGB = new MyCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -82,7 +83,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1413, 336);
+            this.dataGridView1.Size = new System.Drawing.Size(1880, 336);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -107,6 +108,16 @@
             this.groupBox1.TabIndex = 99;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ANMELDUNG SINGINGCAR";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Crimson;
+            this.label6.Location = new System.Drawing.Point(536, 103);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.TabIndex = 99;
+            this.label6.Text = "0";
             // 
             // label11
             // 
@@ -154,16 +165,6 @@
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 99;
             this.label3.Text = "Nachname:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Crimson;
-            this.label6.Location = new System.Drawing.Point(536, 103);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 13);
-            this.label6.TabIndex = 99;
-            this.label6.Text = "0";
             // 
             // label5
             // 
@@ -236,7 +237,7 @@
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Aqua;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Lime;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(1240, 23);
+            this.button1.Location = new System.Drawing.Point(1707, 23);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(185, 119);
             this.button1.TabIndex = 7;
@@ -303,7 +304,7 @@
             this.buttonReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Aqua;
             this.buttonReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonReset.Location = new System.Drawing.Point(1240, 285);
+            this.buttonReset.Location = new System.Drawing.Point(1707, 285);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(185, 119);
             this.buttonReset.TabIndex = 8;
@@ -320,7 +321,7 @@
             this.textBoxDiscl.Name = "textBoxDiscl";
             this.textBoxDiscl.ReadOnly = true;
             this.textBoxDiscl.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDiscl.Size = new System.Drawing.Size(1413, 286);
+            this.textBoxDiscl.Size = new System.Drawing.Size(1880, 286);
             this.textBoxDiscl.TabIndex = 100;
             this.textBoxDiscl.Visible = false;
             // 
@@ -335,7 +336,7 @@
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOK.Location = new System.Drawing.Point(12, 710);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(1413, 44);
+            this.buttonOK.Size = new System.Drawing.Size(1880, 44);
             this.buttonOK.TabIndex = 101;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = false;
@@ -350,12 +351,13 @@
             this.buttonAGB.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Aqua;
             this.buttonAGB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.buttonAGB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAGB.Location = new System.Drawing.Point(1240, 243);
+            this.buttonAGB.Location = new System.Drawing.Point(1707, 148);
             this.buttonAGB.Name = "buttonAGB";
             this.buttonAGB.Size = new System.Drawing.Size(185, 36);
             this.buttonAGB.TabIndex = 104;
             this.buttonAGB.Text = "AGB\'s";
             this.buttonAGB.UseVisualStyleBackColor = false;
+            this.buttonAGB.Visible = false;
             this.buttonAGB.Click += new System.EventHandler(this.button2_Click);
             // 
             // label10
@@ -365,7 +367,7 @@
             this.label10.ForeColor = System.Drawing.Color.Crimson;
             this.label10.Location = new System.Drawing.Point(12, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(1413, 661);
+            this.label10.Size = new System.Drawing.Size(1880, 661);
             this.label10.TabIndex = 110;
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label10.Visible = false;
@@ -386,7 +388,7 @@
             this.buttonID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonID.Location = new System.Drawing.Point(12, 673);
             this.buttonID.Name = "buttonID";
-            this.buttonID.Size = new System.Drawing.Size(1413, 81);
+            this.buttonID.Size = new System.Drawing.Size(1880, 81);
             this.buttonID.TabIndex = 111;
             this.buttonID.Text = "OK";
             this.buttonID.UseVisualStyleBackColor = false;
@@ -395,49 +397,51 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::Anmeldung.Properties.Resources.Anmeldeoverlay1;
-            this.pictureBox1.Location = new System.Drawing.Point(732, 23);
+            this.pictureBox1.Location = new System.Drawing.Point(738, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(502, 389);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(969, 420);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 105;
             this.pictureBox1.TabStop = false;
             // 
+            // myCheckBox1
+            // 
+            this.myCheckBox1.Location = new System.Drawing.Point(866, 147);
+            this.myCheckBox1.Name = "myCheckBox1";
+            this.myCheckBox1.Size = new System.Drawing.Size(37, 36);
+            this.myCheckBox1.TabIndex = 112;
+            this.myCheckBox1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.myCheckBox1.CheckedChanged += new System.EventHandler(this.myCheckBox1_CheckedChanged);
+            // 
             // myCheckBox3
             // 
-            this.myCheckBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.myCheckBox3.Checked = true;
             this.myCheckBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.myCheckBox3.Location = new System.Drawing.Point(1240, 201);
+            this.myCheckBox3.Location = new System.Drawing.Point(866, 269);
             this.myCheckBox3.Name = "myCheckBox3";
-            this.myCheckBox3.Size = new System.Drawing.Size(185, 36);
+            this.myCheckBox3.Size = new System.Drawing.Size(37, 36);
             this.myCheckBox3.TabIndex = 109;
-            this.myCheckBox3.Text = "Zum Legoland-Newsletter anmelden";
             this.myCheckBox3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.myCheckBox3.UseVisualStyleBackColor = true;
+            this.myCheckBox3.CheckedChanged += new System.EventHandler(this.myCheckBox3_CheckedChanged);
             // 
             // checkBoxAGB
             // 
-            this.checkBoxAGB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxAGB.Location = new System.Drawing.Point(1240, 159);
+            this.checkBoxAGB.Location = new System.Drawing.Point(866, 194);
             this.checkBoxAGB.Name = "checkBoxAGB";
-            this.checkBoxAGB.Size = new System.Drawing.Size(185, 36);
+            this.checkBoxAGB.Size = new System.Drawing.Size(35, 36);
             this.checkBoxAGB.TabIndex = 103;
-            this.checkBoxAGB.Text = "Akzeptiere die AGB\'s";
             this.checkBoxAGB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxAGB.UseVisualStyleBackColor = true;
+            this.checkBoxAGB.CheckedChanged += new System.EventHandler(this.checkBoxAGB_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(95)))));
-            this.ClientSize = new System.Drawing.Size(1437, 766);
+            this.ClientSize = new System.Drawing.Size(1904, 766);
+            this.Controls.Add(this.myCheckBox1);
             this.Controls.Add(this.buttonID);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.myCheckBox3);
             this.Controls.Add(this.buttonAGB);
             this.Controls.Add(this.checkBoxAGB);
@@ -449,6 +453,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label10);
             this.ForeColor = System.Drawing.Color.White;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -501,6 +506,7 @@
         private System.Windows.Forms.Button buttonID;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private MyCheckBox myCheckBox1;
     }
 }
 

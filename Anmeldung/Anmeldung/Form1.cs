@@ -112,6 +112,16 @@ namespace Anmeldung
                 return;
             }
 
+            try
+            {
+                pictureBox1.Image = Image.FromFile("Anmeldeoverlay.png");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant open Anmeldeoverlay.png");
+                return;
+            }
+
 
             // this.TopMost = true;
             this.Location = new Point(0, 0);
@@ -298,7 +308,7 @@ namespace Anmeldung
                 return;
             }
 
-            if (GetAge(dateTimePicker1.Value.Date) < 18)
+            if (GetAge(dateTimePicker1.Value.Date) < 18 || !myCheckBox1.Checked)
             {
                 MessageBox.Show("Sie müssen min. 18 Jahre alt sein!");
                 return;
@@ -468,6 +478,23 @@ namespace Anmeldung
             buttonID.Visible = false;
             dateTimePicker1.CustomFormat = "dd.MM.yyyy";
             dateTimePicker1.Value = DateTime.Now;
+            myCheckBox1.Checked = false;
+            myCheckBox3.Checked = true;
+        }
+
+        private void myCheckBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxAGB_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void myCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
