@@ -58,6 +58,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonID = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.myCheckBox1 = new MyCheckBox();
             this.myCheckBox3 = new MyCheckBox();
             this.checkBoxAGB = new MyCheckBox();
@@ -89,6 +90,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
@@ -145,9 +147,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(6, 86);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(76, 13);
+            this.label9.Size = new System.Drawing.Size(80, 13);
             this.label9.TabIndex = 99;
-            this.label9.Text = "Geburtsdatum:";
+            this.label9.Text = "Geburtsdatum*:";
             // 
             // textBox6
             // 
@@ -162,9 +164,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(367, 27);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 99;
-            this.label3.Text = "Nachname:";
+            this.label3.Text = "Nachname*:";
             // 
             // label5
             // 
@@ -189,9 +191,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 208);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 99;
-            this.label4.Text = "Song:";
+            this.label4.Text = "Song*:";
             // 
             // textBox3
             // 
@@ -207,9 +209,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 146);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 99;
-            this.label2.Text = "E-Mail: ";
+            this.label2.Text = "E-Mail*: ";
             // 
             // textBox2
             // 
@@ -225,9 +227,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 99;
-            this.label1.Text = "Vorname:";
+            this.label1.Text = "Vorname*:";
             // 
             // button1
             // 
@@ -405,6 +407,15 @@
             this.pictureBox1.TabIndex = 105;
             this.pictureBox1.TabStop = false;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 267);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 13);
+            this.label12.TabIndex = 101;
+            this.label12.Text = "*Pflichtfelder";
+            // 
             // myCheckBox1
             // 
             this.myCheckBox1.Location = new System.Drawing.Point(866, 147);
@@ -440,6 +451,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(95)))));
             this.ClientSize = new System.Drawing.Size(1904, 766);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.myCheckBox1);
             this.Controls.Add(this.buttonID);
             this.Controls.Add(this.myCheckBox3);
@@ -453,7 +465,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label10);
             this.ForeColor = System.Drawing.Color.White;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -507,6 +518,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox1;
         private MyCheckBox myCheckBox1;
+        private System.Windows.Forms.Label label12;
     }
 }
 

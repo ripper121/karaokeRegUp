@@ -160,6 +160,7 @@ namespace Anmeldung
             buttonID.Font = theFont_Big;
             myCheckBox3.Font = theFont_Small;
             checkBoxAGB.Font = theFont_Small;
+            label12.Font = theFont_Small;
         }
 
         public static DataTable ConvertCSVtoDataTable(string strFilePath)
