@@ -113,7 +113,7 @@ namespace VideoUploader
                         newCustom.Video = lines[7];
                     if (lines[8].Contains("Failed"))
                         newCustom.Status = (byte)customerStatus.Failed;
-                    listBoxFailed.Items.Add(newCustom.ID + "|" + newCustom.Name + "|" + newCustom.Mail + "|" + newCustom.Song + "|" + newCustom.Status);
+                    listBoxFailed.Items.Add(newCustom.ID + "  |  " + newCustom.Name + "  |  " + newCustom.Mail + "  |  " + newCustom.Song + "  |  " + newCustom.Status);
                     registrationList.Add(newCustom);
                 }
             }
@@ -133,9 +133,9 @@ namespace VideoUploader
 
             int count = registrationList.Count - 1;
             if (registrationList[count].Status != (byte)customerStatus.Failed)
-                listBoxAnmeldung.Items.Add(registrationList[count].ID + "|" + registrationList[count].Name + "|" + registrationList[count].Mail + "|" + registrationList[count].Song + "|" + registrationList[count].Status);
+                listBoxAnmeldung.Items.Add(registrationList[count].ID + "  |  " + registrationList[count].Name + "  |  " + registrationList[count].Mail + "  |  " + registrationList[count].Song + "  |  " + registrationList[count].Status);
             else
-                listBoxAnmeldung.Items.Add(registrationList[count].Name + "|" + registrationList[count].Status);
+                listBoxAnmeldung.Items.Add(registrationList[count].Name + "  |  " + registrationList[count].Status);
 
         }
 
@@ -167,11 +167,11 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Ready)
                 {
-                    listBoxReady.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxReady.Items.Add(cust.ID + "  |  " + cust.Name + "  |  " + cust.Mail + "  |  " + cust.Song + "  |  " + cust.Status);
                     cust.Status = (byte)customerStatus.Wait;
                     for (int i = 0; i < listBoxAnmeldung.Items.Count; i++)
                     {
-                        if (Convert.ToInt32(listBoxAnmeldung.Items[i].ToString().Split('|')[0]) == cust.ID)
+                        if (Convert.ToInt32(listBoxAnmeldung.Items[i].ToString().Split('|')[0].TrimStart().TrimEnd()) == cust.ID)
                             listBoxAnmeldung.Items.RemoveAt(i);
                     }
                     textBoxCustomer.Text = "";
@@ -343,7 +343,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Success)
                 {
-                    listBoxSuccess.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxSuccess.Items.Add(cust.ID + "  |  " + cust.Name + "  |  " + cust.Mail + "  |  " + cust.Song + "  |  " + cust.Status);
                     try
                     {
                         var response = Http.Post(httpBaseUri, new NameValueCollection() {
@@ -373,7 +373,7 @@ namespace VideoUploader
 
                     for (int i = 0; i < listBoxUpload.Items.Count; i++)
                     {
-                        if (Convert.ToInt32(listBoxUpload.Items[i].ToString().Split('|')[0]) == cust.ID)
+                        if (Convert.ToInt32(listBoxUpload.Items[i].ToString().Split('|')[0].TrimStart().TrimEnd()) == cust.ID)
                             listBoxUpload.Items.RemoveAt(i);
                     }
                 }
@@ -390,7 +390,7 @@ namespace VideoUploader
                     listBoxReady.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
                     for (int i = 0; i < listBoxReady.Items.Count; i++)
                     {
-                        if (Convert.ToInt32(listBoxFailed.Items[i].ToString().Split('|')[0]) == cust.ID)
+                        if (Convert.ToInt32(listBoxFailed.Items[i].ToString().Split('|')[0].TrimStart().TrimEnd()) == cust.ID)
                             listBoxFailed.Items.RemoveAt(i);
                     }
                 }
@@ -408,7 +408,7 @@ namespace VideoUploader
             {
                 if (cust.Status == (byte)customerStatus.Failed)
                 {
-                    listBoxFailed.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxFailed.Items.Add(cust.ID + "  |  " + cust.Name + "  |  " + cust.Mail + "  |  " + cust.Song + "  |  " + cust.Status);
                     cust.Status = (byte)customerStatus.Failed;
                     if (WaitForFile(pathCustomer + @"\" + cust.ID + ".txt", FileMode.Open, FileAccess.Read))
                         File.AppendAllText(pathCustomer + @"\" + cust.ID + ".txt", "Failed\n");
@@ -416,7 +416,7 @@ namespace VideoUploader
                         MessageBox.Show("Cant access " + pathCustomer + @"\" + cust.ID + ".txt");
                     for (int i = 0; i < listBoxUpload.Items.Count; i++)
                     {
-                        if (Convert.ToInt32(listBoxUpload.Items[i].ToString().Split('|')[0]) == cust.ID)
+                        if (Convert.ToInt32(listBoxUpload.Items[i].ToString().Split('|')[0].TrimStart().TrimEnd()) == cust.ID)
                             listBoxUpload.Items.RemoveAt(i);
                     }
                 }
@@ -428,7 +428,7 @@ namespace VideoUploader
             int selectedIndex = listBoxAnmeldung.SelectedIndex;
             if (selectedIndex != -1)
             {
-                int selectedCustomer = Convert.ToInt32(listBoxAnmeldung.Items[selectedIndex].ToString().Split('|')[0]);
+                int selectedCustomer = Convert.ToInt32(listBoxAnmeldung.Items[selectedIndex].ToString().Split('|')[0].TrimStart().TrimEnd());
                 foreach (customer cust in registrationList)
                 {
                     if (cust.ID == selectedCustomer)
@@ -437,11 +437,12 @@ namespace VideoUploader
                         textBoxCustomer.Text = cust.ID.ToString() + " | " + cust.Name;
                         try
                         {
-                                File.Copy(pathImageIn, pathImageOut,true);
-                                if (WaitForFile(pathImageOut, FileMode.Open, FileAccess.Read))
-                                    writeToPNG(imageText + selectedCustomer, pathImageIn, pathImageOut, imageTextPos, imageTextSize);
+                            String imageOutput = pathImageOut + "\\" + cust.ID.ToString() + ".png";
+                                File.Copy(pathImageIn, imageOutput, true);
+                                if (WaitForFile(imageOutput, FileMode.Open, FileAccess.Read))
+                                    writeToPNG(imageText + selectedCustomer, pathImageIn, imageOutput, imageTextPos, imageTextSize);
                                 else
-                                    MessageBox.Show("Can't write to Output Image: " + pathImageOut);
+                                    MessageBox.Show("Can't write to Output Image: " + imageOutput);
                             
                         }
                         catch (Exception ex)
@@ -497,10 +498,10 @@ namespace VideoUploader
                         MessageBox.Show("Cant copy :" + pathCustomer + @"\" + cust.ID + ".txt");
                     FtpAsync(ftpUserName, ftpPassword, ftpBaseUri, pathReadyCustomer + @"\" + cust.ID + ".mp4", cust.ID);
                     cust.Status = (byte)customerStatus.Upload;
-                    listBoxUpload.Items.Add(cust.ID + "|" + cust.Name + "|" + cust.Mail + "|" + cust.Song + "|" + cust.Status);
+                    listBoxUpload.Items.Add(cust.ID + "  |  " + cust.Name + "  |  " + cust.Mail + "  |  " + cust.Song + "  |  " + cust.Status);
                     for (int i = 0; i < listBoxReady.Items.Count; i++)
                     {
-                        if (Convert.ToInt32(listBoxReady.Items[i].ToString().Split('|')[0]) == cust.ID)
+                        if (Convert.ToInt32(listBoxReady.Items[i].ToString().Split('|')[0].TrimStart().TrimEnd()) == cust.ID)
                             listBoxReady.Items.RemoveAt(i);
                     }
                 }
