@@ -480,7 +480,7 @@ namespace Anmeldung
             dateTimePicker1.CustomFormat = "dd.MM.yyyy";
             dateTimePicker1.Value = DateTime.Now;
             myCheckBox1.Checked = false;
-            myCheckBox3.Checked = true;
+            myCheckBox3.Checked = false;
         }
 
         private void myCheckBox3_CheckedChanged(object sender, EventArgs e)

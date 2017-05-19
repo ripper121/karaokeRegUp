@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -57,11 +58,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.buttonID = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.myCheckBox1 = new MyCheckBox();
             this.myCheckBox3 = new MyCheckBox();
             this.checkBoxAGB = new MyCheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -110,6 +110,15 @@
             this.groupBox1.TabIndex = 99;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ANMELDUNG SINGINGCAR";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 267);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 13);
+            this.label12.TabIndex = 101;
+            this.label12.Text = "*Pflichtfelder";
             // 
             // label6
             // 
@@ -397,25 +406,6 @@
             this.buttonID.Visible = false;
             this.buttonID.Click += new System.EventHandler(this.buttonID_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Anmeldung.Properties.Resources.Anmeldeoverlay1;
-            this.pictureBox1.Location = new System.Drawing.Point(738, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(969, 420);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 105;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 267);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 13);
-            this.label12.TabIndex = 101;
-            this.label12.Text = "*Pflichtfelder";
-            // 
             // myCheckBox1
             // 
             this.myCheckBox1.Location = new System.Drawing.Point(866, 147);
@@ -427,8 +417,6 @@
             // 
             // myCheckBox3
             // 
-            this.myCheckBox3.Checked = true;
-            this.myCheckBox3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.myCheckBox3.Location = new System.Drawing.Point(866, 269);
             this.myCheckBox3.Name = "myCheckBox3";
             this.myCheckBox3.Size = new System.Drawing.Size(37, 36);
@@ -444,6 +432,16 @@
             this.checkBoxAGB.TabIndex = 103;
             this.checkBoxAGB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxAGB.CheckedChanged += new System.EventHandler(this.checkBoxAGB_CheckedChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Anmeldung.Properties.Resources.Anmeldeoverlay1;
+            this.pictureBox1.Location = new System.Drawing.Point(738, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(969, 420);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 105;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
