@@ -435,20 +435,54 @@ namespace VideoUploader
                     {
                         cust.Status = (byte)customerStatus.Selected;
                         textBoxCustomer.Text = cust.ID.ToString() + " | " + cust.Name;
+
+                        Boolean writeError = false;
+                        String imageOutput = "";
+                        Exception exOut = null;
                         try
                         {
-                            String imageOutput = pathImageOut + "\\" + cust.ID.ToString() + ".png";
-                                File.Copy(pathImageIn, imageOutput, true);
-                                if (WaitForFile(imageOutput, FileMode.Open, FileAccess.Read))
-                                    writeToPNG(imageText + selectedCustomer, pathImageIn, imageOutput, imageTextPos, imageTextSize);
-                                else
-                                    MessageBox.Show("Can't write to Output Image: " + imageOutput);
-                            
+                            imageOutput = pathImageOut + "\\OverlayA.png";
+                            File.Copy(pathImageIn, imageOutput, true);
+                            if (WaitForFile(imageOutput, FileMode.Open, FileAccess.Read))
+                            {
+                                writeToPNG(imageText + selectedCustomer, pathImageIn, imageOutput, imageTextPos, imageTextSize);
+                                writeError = false;
+                            }
+                            else
+                            {
+                                writeError = true;
+                            }
+
+
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Can't write to Output Image: " + ex.Message);
+                            writeError = true;
+                            exOut = ex;
                         }
+                        try
+                        {
+                            imageOutput = pathImageOut + "\\OverlayB.png";
+                            File.Copy(pathImageIn, imageOutput, true);
+                            if (WaitForFile(imageOutput, FileMode.Open, FileAccess.Read))
+                            {
+                                writeToPNG(imageText + selectedCustomer, pathImageIn, imageOutput, imageTextPos, imageTextSize);
+                                writeError = false;
+                            }
+                            else
+                            {
+                                writeError = true;
+                            }
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            writeError = true;
+                            exOut = ex;
+                        }
+                        if (writeError)
+                            MessageBox.Show("Can't write to Output Image: " + exOut.Message);
                     }
                     else if (cust.Status == (byte)customerStatus.Selected)
                     {
