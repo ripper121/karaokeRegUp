@@ -507,7 +507,7 @@ namespace VideoUploader
                                    FontStyle.Regular,
                                    GraphicsUnit.Pixel);
             graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            graphics.DrawString(text, font, Brushes.Black, pos.X, pos.Y);
+            graphics.DrawString(text, font, new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 44, 95)), pos.X, pos.Y);
             
             b.Save(fileOut, image.RawFormat);
 
