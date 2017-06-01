@@ -55,10 +55,18 @@ namespace Anmeldung
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FontFamily family = LoadFontFamily(Application.StartupPath + @"\Fonts\HyundaiSansTextOffice-Regular.ttf", out fonts);
-            Font theFont_Big = new Font(family, 15.0f);
-            Font theFont_Small = new Font(family, 8.0f);
-            Font theFont_Bigger = new Font(family, 25.0f);
+            try
+            {
+                FontFamily family = LoadFontFamily(Application.StartupPath + @"\Fonts\HyundaiSansTextOffice-Regular.ttf", out fonts);
+                Font theFont_Big = new Font(family, 15.0f);
+                Font theFont_Small = new Font(family, 8.0f);
+                Font theFont_Bigger = new Font(family, 25.0f);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant load font file: " + ex.Message);
+                return;
+            }
 
             try
             {
@@ -126,7 +134,7 @@ namespace Anmeldung
             // this.TopMost = true;
             this.Location = new Point(0, 0);
             this.Width = Screen.PrimaryScreen.Bounds.Width + 16;
-            this.Height = Screen.PrimaryScreen.Bounds.Height - 270;
+            this.Height = Screen.PrimaryScreen.Bounds.Height+16;
             this.FormBorderStyle = FormBorderStyle.None;
             groupBox1.ForeColor = Color.White;
             groupBox2.ForeColor = Color.White;

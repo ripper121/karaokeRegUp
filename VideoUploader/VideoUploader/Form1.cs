@@ -44,6 +44,17 @@ namespace VideoUploader
         private string httpBaseUri = "";
         private Configuration config = null;
 
+        PrivateFontCollection fonts;
+        FontFamily family;
+        Font theFont;
+
+        public static FontFamily LoadFontFamily(string fileName, out PrivateFontCollection fontCollection)
+        {
+            fontCollection = new PrivateFontCollection();
+            fontCollection.AddFontFile(fileName);
+            return fontCollection.Families[0];
+        }
+
 
         FileSystemWatcher txtFSW, mp4FSW;
 
@@ -186,6 +197,16 @@ namespace VideoUploader
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            {
+                family = LoadFontFamily(Application.StartupPath + @"\Fonts\HyundaiSansTextOffice-Regular.ttf", out fonts);
+                theFont = new Font(family, 15.0f);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cant load font file: " + ex.Message);
+                return;
+            }
 
             try
             {
@@ -441,7 +462,7 @@ namespace VideoUploader
                         Exception exOut = null;
                         try
                         {
-                            imageOutput = pathImageOut + "\\OverlayA.png";
+                            imageOutput = pathImageOut + "\\overlay.png";
                             File.Copy(pathImageIn, imageOutput, true);
                             if (WaitForFile(imageOutput, FileMode.Open, FileAccess.Read))
                             {
@@ -462,7 +483,7 @@ namespace VideoUploader
                         }
                         try
                         {
-                            imageOutput = pathImageOut + "\\OverlayB.png";
+                            imageOutput = pathImageOut + "\\overlay.png";
                             File.Copy(pathImageIn, imageOutput, true);
                             if (WaitForFile(imageOutput, FileMode.Open, FileAccess.Read))
                             {
@@ -501,13 +522,9 @@ namespace VideoUploader
 
             Bitmap b = new Bitmap(image);
             Graphics graphics = Graphics.FromImage(b);
-            FontFamily fontFamily = new FontFamily("Times New Roman");
-            Font font = new Font(fontFamily,
-                                   size,
-                                   FontStyle.Regular,
-                                   GraphicsUnit.Pixel);
+            theFont = new Font(family, size);
             graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            graphics.DrawString(text, font, new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 44, 95)), pos.X, pos.Y);
+            graphics.DrawString(text, theFont, new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(0, 44, 95)), pos.X, pos.Y);
             
             b.Save(fileOut, image.RawFormat);
 

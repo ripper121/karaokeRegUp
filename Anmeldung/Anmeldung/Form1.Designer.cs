@@ -464,7 +464,6 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
             this.ForeColor = System.Drawing.Color.White;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Anmeldung";
