@@ -1,0 +1,9 @@
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\bin\Debug\Overlay.exe.config
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\bin\Debug\Overlay.exe
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\bin\Debug\Overlay.pdb
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.csprojResolveAssemblyReference.cache
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.Properties.Resources.resources
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.csproj.GenerateResource.Cache
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.exe
+c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.pdb
+C:\Users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.Form1.resources
