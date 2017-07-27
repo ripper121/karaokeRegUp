@@ -1,0 +1,9 @@
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\bin\Debug\VideoAddOverlay.exe.config
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\bin\Debug\VideoAddOverlay.exe
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\bin\Debug\VideoAddOverlay.pdb
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\obj\Debug\VideoAddOverlay.csprojResolveAssemblyReference.cache
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\obj\Debug\VideoAddOverlay.Form1.resources
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\obj\Debug\VideoAddOverlay.Properties.Resources.resources
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\obj\Debug\VideoAddOverlay.csproj.GenerateResource.Cache
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\obj\Debug\VideoAddOverlay.exe
+c:\users\sts\documents\visual studio 2015\Projects\VideoAddOverlay\VideoAddOverlay\obj\Debug\VideoAddOverlay.pdb
