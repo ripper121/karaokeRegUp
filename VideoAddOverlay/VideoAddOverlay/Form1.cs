@@ -17,6 +17,7 @@ namespace VideoAddOverlay
     {
         FileSystemWatcher FSW;
         String inputPath = "input\\", outputPath = "output\\", overlayPath = "overlay.png";
+        int waitForFileTime = 1;
         String latestFile = "", statusFile = "";
         Color statusColor = Color.White;
         private Configuration config = null;
@@ -49,7 +50,8 @@ namespace VideoAddOverlay
                 statusColor = Color.Red;
                 return;
             }
-            if (WaitForFile(e.FullPath, FileMode.Open, FileAccess.Read))
+            statusFile = "Wait for read Access...";
+            if (WaitForFile(e.FullPath, FileMode.Open, FileAccess.Read, waitForFileTime))
             {
                 try
                 {
@@ -62,7 +64,7 @@ namespace VideoAddOverlay
                     return;
                 }
 
-                if (WaitForFile(outputPath + e.Name, FileMode.Open, FileAccess.Read))
+                if (WaitForFile(outputPath + e.Name, FileMode.Open, FileAccess.Read, waitForFileTime))
                 {
                     statusFile = "File Copyed!";
                     statusColor = Color.Green;
@@ -113,16 +115,16 @@ namespace VideoAddOverlay
             }
         }
 
-        bool WaitForFile(string fullPath, FileMode mode, FileAccess access)
+        bool WaitForFile(string fullPath, FileMode mode, FileAccess access, int wait)
         {
-            for (int numTries = 0; numTries < 10; numTries++)
+            for (int numTries = 0; numTries < wait; numTries++)
             {
                 FileStream fs = null;
                 try
                 {
                     fs = new FileStream(fullPath, mode, access);
                     fs.Dispose();
-                    System.Threading.Thread.Sleep(100);
+                    System.Threading.Thread.Sleep(1000);
                     return true;
                 }
                 catch (IOException)
@@ -131,7 +133,7 @@ namespace VideoAddOverlay
                     {
                         fs.Dispose();
                     }
-                    System.Threading.Thread.Sleep(100);
+                    System.Threading.Thread.Sleep(1000);
                 }
             }
 
@@ -172,6 +174,7 @@ namespace VideoAddOverlay
                 inputPath = config.AppSettings.Settings["inputPath"].Value;
                 outputPath = config.AppSettings.Settings["outputPath"].Value;
                 overlayPath = config.AppSettings.Settings["overlayPath"].Value;
+                waitForFileTime = Convert.ToInt32(config.AppSettings.Settings["waitForFileTime"].Value);
                 if (!Directory.Exists(inputPath))
                 {
                     MessageBox.Show("Cant find inputPath:" + inputPath);
