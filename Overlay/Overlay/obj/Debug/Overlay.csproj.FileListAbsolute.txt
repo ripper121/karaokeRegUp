@@ -7,3 +7,6 @@ c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Deb
 c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.exe
 c:\users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.pdb
 C:\Users\ripper121\documents\visual studio 2017\Projects\Overlay\Overlay\obj\Debug\Overlay.Form1.resources
+C:\Users\sts\Documents\GitHub\karaokeRegUp\Overlay\Overlay\bin\Debug\Overlay.exe.config
+C:\Users\sts\Documents\GitHub\karaokeRegUp\Overlay\Overlay\obj\Debug\Overlay.exe
+C:\Users\sts\Documents\GitHub\karaokeRegUp\Overlay\Overlay\obj\Debug\Overlay.pdb

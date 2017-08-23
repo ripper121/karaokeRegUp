@@ -1,0 +1,9 @@
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\bin\Debug\RandomPicture.exe.config
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\bin\Debug\RandomPicture.exe
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\bin\Debug\RandomPicture.pdb
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.csprojResolveAssemblyReference.cache
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.Form1.resources
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.Properties.Resources.resources
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.csproj.GenerateResource.Cache
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.exe
+c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.pdb
