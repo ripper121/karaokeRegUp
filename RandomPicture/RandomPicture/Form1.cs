@@ -243,6 +243,7 @@ namespace RandomPicture
             textBoxInput.Text = textInput;
             textBoxStatus.Text = textStatus;
             textBoxLastNumber.Text = textLastNumber;
+            textBoxWinner.Text = winnerCounter.ToString() + " / " + maxWinner.ToString();
         }
     }
 }

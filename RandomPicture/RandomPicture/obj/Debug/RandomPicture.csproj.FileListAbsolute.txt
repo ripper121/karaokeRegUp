@@ -7,3 +7,12 @@ c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\o
 c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.csproj.GenerateResource.Cache
 c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.exe
 c:\users\sts\documents\visual studio 2015\Projects\RandomPicture\RandomPicture\obj\Debug\RandomPicture.pdb
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\bin\Debug\RandomPicture.exe.config
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\obj\Debug\RandomPicture.exe
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\obj\Debug\RandomPicture.pdb
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\bin\Debug\RandomPicture.exe
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\bin\Debug\RandomPicture.pdb
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\obj\Debug\RandomPicture.csprojResolveAssemblyReference.cache
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\obj\Debug\RandomPicture.Form1.resources
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\obj\Debug\RandomPicture.Properties.Resources.resources
+C:\Users\sts\Documents\GitHub\karaokeRegUp\RandomPicture\RandomPicture\obj\Debug\RandomPicture.csproj.GenerateResource.Cache
